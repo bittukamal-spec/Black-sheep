@@ -8,3 +8,6 @@
 ## Sales mockup
 - `sales-dashboard.html`: clickable Sales page with all 9 ideas (range chips Today / 7 / 30 / 90 days, hour vs heatmap toggle, quantity vs revenue toggle). Numbers are made up.
 - `sales/`: phone screenshots of each section (7-day view).
+
+## Live Sales page
+- `sales-live/`: screenshots of the real Sales page (chatbot PR 18) with 70 days of generated test orders.
