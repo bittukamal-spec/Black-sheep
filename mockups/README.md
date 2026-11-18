@@ -11,3 +11,6 @@
 
 ## Live Sales page
 - `sales-live/`: screenshots of the real Sales page (chatbot PR 18) with 70 days of generated test orders.
+
+## POS v3
+- `pos-v3.html` / `pos-v3.png`: darker text, popup for items with no options, new Orders cards with colour-coded option tags.
