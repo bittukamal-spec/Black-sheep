@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POS Dashboard Mockup</title>
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --panel: #ffffff;
+    --ink: #1d1b19;
+    --muted: #6f6a64;
+    --line: #e3ddd4;
+    --ok: #2f7d4f;
+    --upi: #2f5d7c;
+    --cash: #2f7d4f;
+
+    /* category colours */
+    --c-espresso: #5b3a29;
+    --c-milk: #b9824f;
+    --c-special: #7a3e6b;
+    --c-brew: #2f5d7c;
+    --c-noncoffee: #3f7a4a;
+    --c-tea: #b5832a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; color: inherit; }
+
+  /* ---------- top bar ---------- */
+  header {
+    padding: 12px 16px; background: var(--panel); border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 5;
+  }
+  .brand { font-weight: 800; font-size: 18px; }
+
+  main { padding: 12px 12px 110px; max-width: 1200px; margin: 0 auto; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 10px; font-size: 12px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  /* ---------- product grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .tile {
+    position: relative; aspect-ratio: 1 / 1;
+    border: 0; border-radius: 14px; color: #fff; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 14px; text-align: left;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
+    transition: transform .08s ease, filter .08s ease;
+  }
+  .tile:active { transform: scale(.96); filter: brightness(.92); }
+  .tile .name { font-size: 18px; font-weight: 700; line-height: 1.2; color: #fff; }
+  .tile .price { font-size: 14px; opacity: .85; color: #fff; }
+  .badge {
+    position: absolute; bottom: 8px; right: 8px;
+    min-width: 26px; height: 26px; padding: 0 7px; border-radius: 13px;
+    background: #fff; color: var(--ink); font-size: 14px; font-weight: 800;
+    display: grid; place-items: center; box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  }
+
+  /* ---------- bottom order bar ---------- */
+  .orderbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 6;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: var(--panel); border-top: 1px solid var(--line);
+    display: none;
+  }
+  .orderbar.show { display: block; animation: up .16s ease-out; }
+  .orderbar button {
+    width: 100%; max-width: 640px; margin: 0 auto; display: flex;
+    height: 58px; border: 0; border-radius: 14px; background: var(--ink); color: #fff;
+    align-items: center; justify-content: space-between; padding: 0 18px;
+    font-size: 17px; font-weight: 700; cursor: pointer;
+  }
+  .orderbar .count {
+    background: #fff; color: var(--ink); border-radius: 10px; padding: 3px 9px; margin-right: 10px; font-size: 15px;
+  }
+
+  /* ---------- sheets ---------- */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(20,18,16,.45);
+    display: none; align-items: flex-end; justify-content: center; z-index: 10;
+  }
+  .overlay.open { display: flex; }
+  @media (min-width: 760px) { .overlay { align-items: center; } }
+
+  .sheet {
+    background: var(--panel); width: 100%; max-width: 640px;
+    max-height: 94vh; overflow: auto; border-radius: 18px 18px 0 0;
+    display: flex; flex-direction: column;
+    animation: up .16s ease-out;
+  }
+  @media (min-width: 760px) { .sheet { border-radius: 18px; } }
+  @keyframes up { from { transform: translateY(30px); opacity: 0; } }
+
+  .sheet-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; color: #fff; position: sticky; top: 0; z-index: 2;
+    background: var(--ink);
+  }
+  .sheet-head h2 { margin: 0; font-size: 21px; }
+  .sheet-head small { opacity: .85; }
+  .close {
+    background: rgba(255,255,255,.2); color: #fff; border: 0;
+    width: 38px; height: 38px; border-radius: 50%; font-size: 20px; cursor: pointer; flex: none;
+  }
+
+  .sheet-body { padding: 0 16px 12px; flex: 1; }
+  .step { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .step:last-child { border-bottom: 0; }
+  .step h3 {
+    margin: 0 0 8px; font-size: 12px; text-transform: uppercase;
+    letter-spacing: .6px; color: var(--muted); display: flex; gap: 8px; align-items: center;
+  }
+  .step h3 .hint { text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+  .opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .opt {
+    position: relative; border: 2px solid var(--line); border-radius: 12px; background: #fff;
+    padding: 8px 8px 8px 36px; min-height: 48px;
+    font-size: 15px; font-weight: 600; text-align: left; cursor: pointer;
+  }
+  .opt::before {
+    content: ""; position: absolute; left: 10px; top: 50%; translate: 0 -50%;
+    width: 17px; height: 17px; border-radius: 5px; border: 2px solid #c9c2b8; background: #fff;
+  }
+  .opt.on { border-color: var(--ink); background: #faf8f5; }
+  .opt.on::before { background: var(--ok); border-color: var(--ok); }
+  .opt.on::after {
+    content: ""; position: absolute; left: 16px; top: 50%;
+    width: 4px; height: 9px; border: solid #fff; border-width: 0 2.5px 2.5px 0;
+    transform: translateY(-65%) rotate(45deg);
+  }
+  .opt small { display: block; font-weight: 400; color: var(--muted); font-size: 11px; }
+
+  .qty { display: flex; align-items: center; gap: 12px; }
+  .qty button {
+    width: 46px; height: 46px; border-radius: 12px; border: 2px solid var(--line);
+    background: #fff; font-size: 22px; cursor: pointer;
+  }
+  .qty output { font-size: 24px; font-weight: 800; min-width: 34px; text-align: center; }
+
+  .sheet-foot {
+    position: sticky; bottom: 0; background: var(--panel); z-index: 2;
+    padding: 10px 16px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line);
+  }
+  .big {
+    width: 100%; height: 58px; border: 0; border-radius: 14px;
+    background: var(--ink); color: #fff; font-size: 17px; font-weight: 700;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0 18px;
+  }
+
+  /* ---------- review & pay ---------- */
+  .items { list-style: none; margin: 0; padding: 0; }
+  .item {
+    display: grid; grid-template-columns: 6px 1fr auto; gap: 10px; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+  }
+  .item .bar { align-self: stretch; border-radius: 3px; }
+  .item .info { cursor: pointer; min-width: 0; }
+  .item .info b { font-size: 16px; }
+  .item .info .who { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .item .info .opts-line { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .item .info .edit { font-size: 12px; color: var(--upi); font-weight: 600; margin-top: 3px; }
+  .item .right { text-align: right; }
+  .item .right .p { font-weight: 700; margin-bottom: 6px; }
+  .mini { display: flex; gap: 4px; align-items: center; justify-content: flex-end; }
+  .mini button {
+    width: 34px; height: 34px; border-radius: 9px; border: 2px solid var(--line); background: #fff;
+    font-size: 17px; cursor: pointer; padding: 0;
+  }
+  .mini output { min-width: 22px; text-align: center; font-weight: 700; }
+
+  .addmore {
+    width: 100%; margin-top: 12px; height: 46px; border: 2px dashed #c9c2b8; border-radius: 12px;
+    background: transparent; font-weight: 600; color: var(--muted); cursor: pointer;
+  }
+  .clear { background: none; border: 0; color: #a34a2a; font-size: 13px; font-weight: 600; cursor: pointer; padding: 10px 0 0; }
+
+  .totalrow { display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+  .pay { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pay button {
+    height: 60px; border: 0; border-radius: 14px; color: #fff; font-size: 17px; font-weight: 800; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15;
+  }
+  .pay button small { font-weight: 500; font-size: 12px; opacity: .9; }
+  .pay .upi { background: var(--upi); }
+  .pay .cash { background: var(--cash); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 90px; translate: -50% 0;
+    background: var(--ok); color: #fff; padding: 12px 18px; border-radius: 12px;
+    font-weight: 600; display: none; z-index: 20; max-width: calc(100% - 32px); text-align: center;
+  }
+  .toast.show { display: block; animation: up .16s ease-out; }
+
+  /* ---------- phone layout ---------- */
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .tile { padding: 10px; border-radius: 12px; aspect-ratio: 5 / 4; }
+    .tile .name { font-size: 14px; }
+    .tile .price { font-size: 12px; }
+    .badge { bottom: 6px; right: 6px; min-width: 22px; height: 22px; font-size: 12px; }
+    .sheet { max-height: 100vh; height: 100%; border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header><div class="brand">Black Sheep · POS</div></header>
+
+<main>
+  <div class="legend" id="legend"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- appears once the first drink is added -->
+<div class="orderbar" id="orderbar">
+  <button id="review"><span><span class="count" id="ob-count">0</span>Review &amp; pay</span><span id="ob-total">₹0</span></button>
+</div>
+
+<!-- 1) drink options -->
+<div class="overlay" id="ov-item">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <div class="sheet-head" id="item-head">
+      <div><h2 id="i-name"></h2><small id="i-sub"></small></div>
+      <button class="close" data-close="ov-item" aria-label="Close">×</button>
+    </div>
+    <div class="sheet-body" id="steps"></div>
+    <div class="sheet-foot">
+      <button class="big" id="add"><span id="add-label">Add to order</span><span id="add-total">₹0</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- 2) review & pay -->
+<div class="overlay" id="ov-cart">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <div class="sheet-head">
+      <div><h2>Current order</h2><small id="c-sub"></small></div>
+      <button class="close" data-close="ov-cart" aria-label="Close">×</button>
+    </div>
+    <div class="sheet-body">
+      <ul class="items" id="items"></ul>
+      <button class="addmore" data-close="ov-cart">+ Add another drink</button>
+      <button class="clear" id="clear">Clear order</button>
+    </div>
+    <div class="sheet-foot">
+      <div class="totalrow"><span>Total</span><span id="c-total">₹0</span></div>
+      <div class="pay">
+        <button class="upi" data-pay="UPI">UPI<small>tap when paid</small></button>
+        <button class="cash" data-pay="Cash">Cash<small>tap when paid</small></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- mock data ---------- */
+const CATS = {
+  espresso:  { label: "Espresso",    color: "var(--c-espresso)" },
+  milk:      { label: "Milk coffee", color: "var(--c-milk)" },
+  special:   { label: "Specialty",   color: "var(--c-special)" },
+  brew:      { label: "Brew",        color: "var(--c-brew)" },
+  tea:       { label: "Tea & Chai",  color: "var(--c-tea)" },
+  noncoffee: { label: "Non-coffee",  color: "var(--c-noncoffee)" },
+};
+const FLAVOURS = [["Vanilla", 30], ["Hazelnut", 30], ["Caramel", 30], ["Irish Cream", 30], ["Cinnamon", 20], ["Chocolate", 30]];
+
+const STEP_DEF = {
+  brew:    { title: "Brewing method", opts: [["Moka Pot"], ["Flair Manual Espresso"]], multi: false },
+  temp:    { title: "Hot or iced",    opts: [["Hot"], ["Iced"]], multi: false },
+  flavour: { title: "Flavours", hint: "optional · pick any", opts: FLAVOURS, multi: true },
+};
+
+const FULL = ["brew", "temp", "flavour"];
+const PRODUCTS = [
+  { name: "Espresso",      price: 120, cat: "espresso",  steps: ["brew"] },
+  { name: "Americano",     price: 150, cat: "espresso",  steps: FULL },
+  { name: "Latte",         price: 190, cat: "milk",      steps: FULL },
+  { name: "Cappuccino",    price: 180, cat: "milk",      steps: FULL },
+  { name: "Flat White",    price: 190, cat: "milk",      steps: ["brew", "flavour"] },
+  { name: "Cortado",       price: 170, cat: "milk",      steps: ["brew"] },
+  { name: "Mocha",         price: 210, cat: "special",   steps: FULL },
+  { name: "Spanish Latte", price: 220, cat: "special",   steps: FULL },
+  { name: "Affogato",      price: 200, cat: "special",   steps: ["brew", "flavour"] },
+  { name: "Cold Brew",     price: 200, cat: "brew",      steps: ["flavour"] },
+  { name: "Pour Over",     price: 180, cat: "brew",      steps: ["temp"] },
+  { name: "Masala Chai",   price: 90,  cat: "tea",       steps: ["temp"] },
+  { name: "Matcha Latte",  price: 230, cat: "tea",       steps: ["temp", "flavour"] },
+  { name: "Hot Chocolate", price: 180, cat: "noncoffee", steps: ["temp", "flavour"] },
+  { name: "Lemonade",      price: 120, cat: "noncoffee", steps: [] },
+];
+
+const $ = (id) => document.getElementById(id);
+const rupee = (n) => "₹" + n.toLocaleString("en-IN");
+const open = (id) => $(id).classList.add("open");
+const shut = (id) => $(id).classList.remove("open");
+
+/* ---------- dashboard ---------- */
+$("legend").innerHTML = Object.values(CATS)
+  .map(c => `<span><i style="background:${c.color}"></i>${c.label}</span>`).join("");
+
+function renderGrid() {
+  $("grid").innerHTML = PRODUCTS.map((p, i) => {
+    const n = cart.filter(it => it.p === p).reduce((a, it) => a + it.qty, 0);
+    return `<button class="tile" style="background:${CATS[p.cat].color}" data-i="${i}">
+      ${n ? `<span class="badge">${n}</span>` : ""}
+      <span class="name">${p.name}</span><span class="price">${rupee(p.price)}</span></button>`;
+  }).join("");
+}
+$("grid").addEventListener("click", (e) => {
+  const t = e.target.closest(".tile");
+  if (t) openItem(PRODUCTS[t.dataset.i]);
+});
+
+/* ---------- drink options (defaults pre-ticked = fewest taps) ---------- */
+let cart = [];
+let draft, editIndex = null;
+
+function defaultsFor(p) {
+  return {
+    p, qty: 1,
+    brew: p.steps.includes("brew") ? "Moka Pot" : null,
+    temp: p.steps.includes("temp") ? "Hot" : null,
+    flavour: new Set(),
+  };
+}
+
+function openItem(p, idx = null) {
+  editIndex = idx;
+  draft = idx === null ? defaultsFor(p) : { ...cart[idx], flavour: new Set(cart[idx].flavour) };
+  $("item-head").style.background = CATS[p.cat].color;
+  $("i-name").textContent = p.name;
+  $("i-sub").textContent = idx === null ? `${rupee(p.price)} · drink ${cart.length + 1} in this order` : "Editing item";
+  $("add-label").textContent = idx === null ? "Add to order" : "Save changes";
+
+  const parts = p.steps.map(key => {
+    const d = STEP_DEF[key];
+    return `<div class="step"><h3>${d.title}${d.hint ? ` <span class="hint">(${d.hint})</span>` : ""}</h3>
+      <div class="opts">${d.opts.map(([v, extra]) =>
+        `<button class="opt" data-k="${key}" data-v="${v}">${v}${extra ? `<small>+${rupee(extra)}</small>` : ""}</button>`).join("")}
+      </div></div>`;
+  });
+  parts.push(`<div class="step"><h3>Quantity <span class="hint">(same drink)</span></h3>
+    <div class="qty"><button data-q="-1" aria-label="Less">−</button><output id="qty">1</output><button data-q="1" aria-label="More">+</button></div></div>`);
+  $("steps").innerHTML = parts.join("");
+  open("ov-item");
+  refreshItem();
+}
+
+$("steps").addEventListener("click", (e) => {
+  const o = e.target.closest(".opt");
+  if (o) {
+    const { k, v } = o.dataset;
+    if (STEP_DEF[k].multi) draft[k].has(v) ? draft[k].delete(v) : draft[k].add(v);
+    else draft[k] = v;
+    return refreshItem();
+  }
+  const q = e.target.closest("[data-q]");
+  if (q) { draft.qty = Math.max(1, Math.min(20, draft.qty + Number(q.dataset.q))); refreshItem(); }
+});
+
+const unit = (it) => it.p.price + [...it.flavour].reduce((a, f) => a + FLAVOURS.find(x => x[0] === f)[1], 0);
+const line = (it) => [it.brew, it.temp, ...it.flavour].filter(Boolean).join(" · ") || "No options";
+
+function refreshItem() {
+  document.querySelectorAll("#steps .opt").forEach(b => {
+    const { k, v } = b.dataset;
+    b.classList.toggle("on", STEP_DEF[k].multi ? draft[k].has(v) : draft[k] === v);
+  });
+  $("qty").textContent = draft.qty;
+  $("add-total").textContent = rupee(unit(draft) * draft.qty);
+}
+
+$("add").onclick = () => {
+  if (editIndex === null) {
+    cart.push(draft);
+    flash(`${draft.qty}× ${draft.p.name} added`);
+    shut("ov-item");
+  } else {
+    cart[editIndex] = draft;
+    shut("ov-item");
+    renderCart();
+  }
+  refreshAll();
+};
+
+/* ---------- review & pay ---------- */
+const cartTotal = () => cart.reduce((a, it) => a + unit(it) * it.qty, 0);
+const cartCount = () => cart.reduce((a, it) => a + it.qty, 0);
+
+function refreshAll() {
+  renderGrid();
+  $("orderbar").classList.toggle("show", cart.length > 0);
+  $("ob-count").textContent = cartCount();
+  $("ob-total").textContent = rupee(cartTotal());
+}
+
+function renderCart() {
+  if (!cart.length) { shut("ov-cart"); return refreshAll(); }
+  $("items").innerHTML = cart.map((it, i) => `
+    <li class="item">
+      <span class="bar" style="background:${CATS[it.p.cat].color}"></span>
+      <div class="info" data-edit="${i}">
+        <div class="who">Drink ${i + 1}</div>
+        <b>${it.p.name}</b>
+        <div class="opts-line">${line(it)}</div>
+        <div class="edit">Tap to change</div>
+      </div>
+      <div class="right">
+        <div class="p">${rupee(unit(it) * it.qty)}</div>
+        <div class="mini">
+          <button data-dq="-1" data-i="${i}" aria-label="Less">${it.qty === 1 ? "🗑" : "−"}</button>
+          <output>${it.qty}</output>
+          <button data-dq="1" data-i="${i}" aria-label="More">+</button>
+        </div>
+      </div>
+    </li>`).join("");
+  $("c-sub").textContent = `${cartCount()} drinks`;
+  $("c-total").textContent = rupee(cartTotal());
+  refreshAll();
+}
+
+$("review").onclick = () => { renderCart(); open("ov-cart"); };
+
+$("items").addEventListener("click", (e) => {
+  const d = e.target.closest("[data-dq]");
+  if (d) {
+    const it = cart[d.dataset.i];
+    it.qty += Number(d.dataset.dq);
+    if (it.qty < 1) cart.splice(d.dataset.i, 1);
+    return renderCart();
+  }
+  const ed = e.target.closest("[data-edit]");
+  if (ed) openItem(cart[ed.dataset.edit].p, Number(ed.dataset.edit));
+});
+
+$("clear").onclick = () => { cart = []; renderCart(); };
+
+document.querySelectorAll("[data-pay]").forEach(b => b.onclick = () => {
+  const total = cartTotal(), n = cartCount();
+  cart = [];
+  shut("ov-cart");
+  refreshAll();
+  flash(`Order placed · ${n} drinks · ${rupee(total)} via ${b.dataset.pay}`);
+});
+
+/* ---------- misc ---------- */
+document.querySelectorAll("[data-close]").forEach(b => b.onclick = () => shut(b.dataset.close));
+document.querySelectorAll(".overlay").forEach(o => o.addEventListener("click", (e) => { if (e.target === o) shut(o.id); }));
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") document.querySelectorAll(".overlay.open").forEach(o => shut(o.id)); });
+
+let tt;
+function flash(msg) {
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+refreshAll();
+</script>
+</body>
+</html>
