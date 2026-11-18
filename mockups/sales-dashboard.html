@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Mockup</title>
+<style>
+  :root {
+    --bg: #f9fafb; --card: #fff; --ink: #111827; --ink2: #374151; --muted: #6b7280;
+    --line: #e5e7eb; --soft: #f3f4f6;
+    --up: #15803d; --down: #b91c1c;
+    --coffee: #5b3a29; --milk: #b9824f; --tea: #2f5d7c; --bites: #3f7a4a; --special: #7a3e6b;
+    --upi: #111827; --cash: #b9824f;
+    --new: #2563eb; --repeat: #7c3aed; --regular: #d97706;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 16px 16px 10px; }
+  h1 { margin: 0 0 10px; font-size: 22px; }
+  .chips { display: flex; gap: 6px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+  .chips button { flex: 1; border: 0; background: none; border-radius: 9px; padding: 8px 0; font: inherit;
+    font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; }
+  .chips button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  main { padding: 4px 16px 90px; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .card h2 { margin: 0 0 2px; font-size: 16px; }
+  .card .sub { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+  .num { font-size: 11px; font-weight: 700; color: #fff; background: var(--ink); border-radius: 50%;
+    width: 18px; height: 18px; display: inline-grid; place-items: center; margin-right: 6px; vertical-align: 2px; }
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi { background: var(--soft); border-radius: 12px; padding: 12px; }
+  .kpi .label { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .kpi .value { font-size: 24px; font-weight: 800; margin: 2px 0; }
+  .delta { font-size: 12px; font-weight: 700; }
+  .delta.up { color: var(--up); } .delta.down { color: var(--down); }
+  .split { display: flex; height: 14px; border-radius: 7px; overflow: hidden; margin: 8px 0 6px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ink2); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; }
+  .legend b { color: var(--ink); }
+  svg text { font-family: inherit; }
+  .callout { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #fef3c7; color: #78350f; font-size: 13px; }
+  .tabs2 { display: flex; gap: 6px; margin-bottom: 10px; }
+  .tabs2 button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 12px;
+    font: inherit; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
+  .tabs2 button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .hbar { display: grid; grid-template-columns: 112px 1fr 64px; align-items: center; gap: 8px; font-size: 13px; margin: 6px 0; }
+  .hbar .name { color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hbar .track { height: 12px; background: var(--soft); border-radius: 6px; overflow: hidden; }
+  .hbar .fill { height: 100%; border-radius: 6px; }
+  .hbar .val { text-align: right; font-weight: 700; }
+  .slow { margin-top: 10px; font-size: 13px; color: var(--ink2); }
+  .slow span { display: inline-block; margin: 4px 6px 0 0; padding: 4px 9px; border-radius: 999px; background: #fee2e2; color: var(--down); font-weight: 600; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mini h3 { margin: 0 0 4px; font-size: 13px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--muted); font-weight: 600; padding: 6px 4px; border-bottom: 1px solid var(--line); }
+  td { padding: 8px 4px; border-bottom: 1px solid var(--soft); }
+  td.r, th.r { text-align: right; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+  .pill.good { background: #dcfce7; color: var(--up); } .pill.mid { background: #fef3c7; color: #92400e; } .pill.bad { background: #fee2e2; color: var(--down); }
+  .pair { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--soft); font-size: 14px; }
+  .pair:last-child { border-bottom: 0; }
+  .pair small { color: var(--muted); }
+  .needs { font-size: 12px; color: var(--muted); border: 1px dashed var(--line); border-radius: 10px; padding: 8px 10px; margin-top: 10px; }
+  .eod { background: var(--ink); color: #fff; border: 0; }
+  .eod .sub { color: #9ca3af; }
+  .eod .rows div { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1f2937; font-size: 14px; }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .btns button { height: 48px; border-radius: 12px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+  .btns .wa { background: #22c55e; color: #fff; border: 0; }
+  .btns .csv { background: transparent; color: #fff; border: 2px solid #fff; }
+  .toast { position: fixed; left: 50%; bottom: 84px; translate: -50% 0; background: var(--ink); color: #fff;
+    padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; display: none; z-index: 20; }
+  nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(4, 1fr); height: 64px; z-index: 6; }
+  nav span { display: grid; place-items: center; font-size: 12px; font-weight: 600; color: #9ca3af; }
+  nav span.on { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sales</h1>
+  <div class="chips" id="range">
+    <button data-r="1" class="on">Today</button>
+    <button data-r="7">7 days</button>
+    <button data-r="30">30 days</button>
+    <button data-r="90">90 days</button>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Snapshot -->
+  <section class="card">
+    <h2><span class="num">1</span>Snapshot</h2>
+    <p class="sub" id="cmpText">Compared with last Tuesday</p>
+    <div class="kpis" id="kpis"></div>
+    <div style="margin-top:14px;font-size:13px;font-weight:600;color:var(--muted)">Payment split</div>
+    <div class="split" id="paySplit"></div>
+    <div class="legend" id="payLegend"></div>
+  </section>
+
+  <!-- 2. Peak hours -->
+  <section class="card">
+    <h2><span class="num">2</span>Busy hours</h2>
+    <p class="sub">Orders per hour. Use this to plan staff and prep.</p>
+    <div class="tabs2" id="peakTabs"><button class="on" data-v="bars">By hour</button><button data-v="heat">Week heatmap</button></div>
+    <div id="peakChart"></div>
+    <div class="callout" id="peakCallout"></div>
+  </section>
+
+  <!-- 3. Trend -->
+  <section class="card">
+    <h2><span class="num">3</span>Revenue trend</h2>
+    <p class="sub" id="trendSub"></p>
+    <div id="trendChart"></div>
+    <div class="legend" style="margin-top:6px"><span><i style="background:var(--ink)"></i>Daily revenue</span><span><i style="background:var(--milk)"></i>7-day average</span></div>
+    <div class="kpis" style="margin-top:12px">
+      <div class="kpi"><div class="label">November so far</div><div class="value">₹1,42,300</div><div class="delta up">▲ 9% vs Oct (same date)</div></div>
+      <div class="kpi"><div class="label">Best day</div><div class="value">₹9,840</div><div class="delta" style="color:var(--muted)">Sat 15 Nov</div></div>
+    </div>
+  </section>
+
+  <!-- 4. Menu performance -->
+  <section class="card">
+    <h2><span class="num">4</span>Menu performance</h2>
+    <p class="sub">What sells, what earns, what to rethink.</p>
+    <div class="tabs2" id="itemTabs"><button class="on" data-v="qty">By quantity</button><button data-v="rev">By revenue</button></div>
+    <div id="topItems"></div>
+    <div class="slow">Slow sellers (consider dropping or promoting):<br><span>Cortado · 3</span><span>Lemonade · 4</span><span>Affogato · 5</span></div>
+
+    <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--muted)">Category share of revenue</div>
+    <div class="split" id="catSplit"></div>
+    <div class="legend" id="catLegend"></div>
+
+    <div class="grid2" style="margin-top:16px">
+      <div class="mini"><h3>Hot vs Iced</h3><div class="split" id="tempSplit"></div><div class="legend" id="tempLegend"></div></div>
+      <div class="mini"><h3>Moka Pot vs Flair 58</h3><div class="split" id="brewSplit"></div><div class="legend" id="brewLegend"></div></div>
+    </div>
+    <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--muted)">Flavours · extra revenue</div>
+    <div id="flavours"></div>
+  </section>
+
+  <!-- 5. Customers -->
+  <section class="card">
+    <h2><span class="num">5</span>Customers</h2>
+    <p class="sub">From the New / Repeat / Regular tag on each order.</p>
+    <div class="split" id="custSplit"></div>
+    <div class="legend" id="custLegend"></div>
+    <table style="margin-top:12px">
+      <tr><th>Type</th><th class="r">Orders</th><th class="r">Revenue</th><th class="r">Avg bill</th></tr>
+      <tbody id="custTable"></tbody>
+    </table>
+    <div class="callout">Regulars spend ₹78 more per visit than new customers. A loyalty card could turn more Repeats into Regulars.</div>
+  </section>
+
+  <!-- 6. Upselling -->
+  <section class="card">
+    <h2><span class="num">6</span>Upselling</h2>
+    <p class="sub">How full is each order?</p>
+    <div class="kpis">
+      <div class="kpi"><div class="label">Items per order</div><div class="value">1.8</div><div class="delta up">▲ 0.2 vs last week</div></div>
+      <div class="kpi"><div class="label">Orders with food</div><div class="value">31%</div><div class="delta down">▼ 3% vs last week</div></div>
+    </div>
+    <div style="margin-top:14px;font-size:13px;font-weight:600;color:var(--muted)">Often bought together</div>
+    <div class="pair"><span>Latte + Croissant</span><small>42 times</small></div>
+    <div class="pair"><span>Cappuccino + Brownie</span><small>31 times</small></div>
+    <div class="pair"><span>Masala Chai + Cookie</span><small>24 times</small></div>
+    <div class="pair"><span>Cold Brew + Banana Bread</span><small>17 times</small></div>
+    <div class="callout">Combo idea: Latte + Croissant for ₹299 (save ₹31).</div>
+  </section>
+
+  <!-- 7. Speed -->
+  <section class="card">
+    <h2><span class="num">7</span>Speed of service</h2>
+    <p class="sub">Time from order placed to marked Done.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="label">Average wait</div><div class="value">6m 40s</div><div class="delta up">▼ 40s faster</div></div>
+      <div class="kpi"><div class="label">Slowest hour</div><div class="value">5–6 pm</div><div class="delta down">avg 11m 20s</div></div>
+    </div>
+    <div id="speedChart" style="margin-top:12px"></div>
+    <div class="needs">Needs one small app change: save the time an order is marked Done.</div>
+  </section>
+
+  <!-- 8. Profit -->
+  <section class="card">
+    <h2><span class="num">8</span>Profit</h2>
+    <p class="sub">Uses a "cost to make" you enter per item in Admin.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="label">Gross profit</div><div class="value" id="gp">₹4,610</div><div class="delta up">▲ 7%</div></div>
+      <div class="kpi"><div class="label">Margin</div><div class="value">68%</div><div class="delta" style="color:var(--muted)">after ingredient cost</div></div>
+    </div>
+    <table style="margin-top:12px">
+      <tr><th>Item</th><th class="r">Price</th><th class="r">Cost</th><th class="r">Margin</th></tr>
+      <tr><td>Americano</td><td class="r">₹140</td><td class="r">₹28</td><td class="r"><span class="pill good">80%</span></td></tr>
+      <tr><td>Latte</td><td class="r">₹180</td><td class="r">₹55</td><td class="r"><span class="pill good">69%</span></td></tr>
+      <tr><td>Masala Chai</td><td class="r">₹80</td><td class="r">₹18</td><td class="r"><span class="pill good">78%</span></td></tr>
+      <tr><td>Croissant</td><td class="r">₹150</td><td class="r">₹78</td><td class="r"><span class="pill mid">48%</span></td></tr>
+      <tr><td>Hot Chocolate</td><td class="r">₹130</td><td class="r">₹82</td><td class="r"><span class="pill bad">37%</span></td></tr>
+    </table>
+    <div class="needs">Needs: a "Cost" box per item in Admin → Menu.</div>
+  </section>
+
+  <!-- 9. End of day -->
+  <section class="card eod">
+    <h2><span class="num" style="background:#fff;color:var(--ink)">9</span>End-of-day report</h2>
+    <p class="sub">Tue 18 Nov · closing summary</p>
+    <div class="rows">
+      <div><span>Total sales</span><b>₹6,780</b></div>
+      <div><span>Orders</span><b>38</b></div>
+      <div><span>UPI</span><b>₹4,920</b></div>
+      <div><span>Cash (count drawer)</span><b>₹1,860</b></div>
+      <div><span>Top item</span><b>Latte × 14</b></div>
+      <div><span>Still preparing</span><b style="color:#fca5a5">0</b></div>
+    </div>
+    <div class="btns">
+      <button class="wa" onclick="toast('Opens WhatsApp with the summary')">Share to WhatsApp</button>
+      <button class="csv" onclick="toast('Downloads orders as CSV')">Download CSV</button>
+    </div>
+  </section>
+</main>
+
+<nav><span>POS</span><span>Orders</span><span class="on">Sales</span><span>Admin</span></nav>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => "₹" + Math.round(n).toLocaleString("en-IN");
+const css = (v) => `var(--${v})`;
+let range = 1;
+
+function seeded(seed) { return () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }; }
+
+function split(el, legendEl, parts, money) {
+  const total = parts.reduce((s, p) => s + p[1], 0);
+  $(el).innerHTML = parts.map(p => `<div style="width:${p[1] / total * 100}%;background:${p[2]}"></div>`).join("");
+  $(legendEl).innerHTML = parts.map(p =>
+    `<span><i style="background:${p[2]}"></i>${p[0]} <b>${Math.round(p[1] / total * 100)}%</b>${money ? " · " + fmt(p[1]) : ""}</span>`).join("");
+}
+
+function hbars(el, rows, color, money) {
+  const max = Math.max(...rows.map(r => r[1]));
+  $(el).innerHTML = rows.map(r => `
+    <div class="hbar"><span class="name">${r[0]}</span>
+      <div class="track"><div class="fill" style="width:${r[1] / max * 100}%;background:${r[2] || color}"></div></div>
+      <span class="val">${money ? fmt(r[1]) : r[1]}</span></div>`).join("");
+}
+
+/* ---------- 1 snapshot ---------- */
+function snapshot() {
+  const days = range;
+  const orders = Math.round(38 * days * (days > 1 ? 0.93 : 1));
+  const revenue = orders * 178;
+  const d = { 1: [12, 8, 4], 7: [6, 4, 2], 30: [9, 5, 3], 90: [14, 9, 5] }[days];
+  $("cmpText").textContent = days === 1 ? "Compared with last Tuesday" : `Compared with the previous ${days} days`;
+  const k = [
+    ["Revenue", fmt(revenue), d[0]],
+    ["Orders", orders.toLocaleString("en-IN"), d[1]],
+    ["Average bill", fmt(revenue / orders), d[2]],
+    ["Cash in drawer", fmt(revenue * 0.27), -3],
+  ];
+  $("kpis").innerHTML = k.map(([l, v, ch]) => `
+    <div class="kpi"><div class="label">${l}</div><div class="value">${v}</div>
+    <div class="delta ${ch >= 0 ? "up" : "down"}">${ch >= 0 ? "▲" : "▼"} ${Math.abs(ch)}%</div></div>`).join("");
+  split("paySplit", "payLegend", [["UPI", revenue * 0.73, css("upi")], ["Cash", revenue * 0.27, css("cash")]], true);
+}
+
+/* ---------- 2 peak hours ---------- */
+const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+const HOURLY = [2, 4, 5, 3, 3, 4, 2, 2, 3, 6, 7, 5, 3, 1];
+let peakView = "bars";
+function peak() {
+  const W = 340, H = 170, pad = 24, bw = (W - pad) / HOURS.length;
+  const mult = range === 1 ? 1 : range;
+  const vals = HOURLY.map(v => v * mult);
+  const max = Math.max(...vals);
+  if (peakView === "bars") {
+    const bars = vals.map((v, i) => {
+      const h = (v / max) * (H - 40), x = pad + i * bw + 3, y = H - 20 - h;
+      const hot = v === max || v >= max * 0.85;
+      return `<rect x="${x}" y="${y}" width="${bw - 6}" height="${h}" rx="3" fill="${hot ? "#b91c1c" : "#111827"}"/>
+        <text x="${x + (bw - 6) / 2}" y="${H - 6}" font-size="9" text-anchor="middle" fill="#6b7280">${HOURS[i] > 12 ? HOURS[i] - 12 : HOURS[i]}${HOURS[i] >= 12 ? "p" : "a"}</text>
+        <text x="${x + (bw - 6) / 2}" y="${y - 3}" font-size="9" text-anchor="middle" fill="#374151">${v}</text>`;
+    }).join("");
+    $("peakChart").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%">${bars}</svg>`;
+  } else {
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const rnd = seeded(7);
+    const cw = (W - 34) / HOURS.length, ch = 18;
+    let cells = "";
+    days.forEach((d, r) => {
+      cells += `<text x="0" y="${r * ch + 13}" font-size="10" fill="#6b7280">${d}</text>`;
+      HOURS.forEach((h, c) => {
+        const weekend = r >= 5 ? 1.5 : 1;
+        const v = Math.min(1, (HOURLY[c] / 7) * weekend * (0.7 + rnd() * 0.5));
+        cells += `<rect x="${34 + c * cw}" y="${r * ch}" width="${cw - 2}" height="${ch - 2}" rx="3" fill="rgba(185,28,28,${0.08 + v * 0.85})"/>`;
+      });
+    });
+    HOURS.forEach((h, c) => { if (c % 2 === 0) cells += `<text x="${34 + c * cw + cw / 2}" y="${7 * ch + 12}" font-size="9" text-anchor="middle" fill="#6b7280">${h > 12 ? h - 12 : h}${h >= 12 ? "p" : "a"}</text>`; });
+    $("peakChart").innerHTML = `<svg viewBox="0 0 ${W} ${7 * ch + 18}" width="100%">${cells}</svg>
+      <div class="legend" style="margin-top:4px"><span><i style="background:rgba(185,28,28,.15)"></i>Quiet</span><span><i style="background:rgba(185,28,28,.9)"></i>Rush</span></div>`;
+  }
+  $("peakCallout").textContent = peakView === "bars"
+    ? "Rush: 5–7 pm (red). Morning peak 10 am. Quietest: 2–3 pm, good time for prep and cleaning."
+    : "Saturday and Sunday evenings are your busiest. Plan two people on the bar then.";
+}
+
+/* ---------- 3 trend ---------- */
+function trend() {
+  const n = range === 1 ? 14 : range;
+  const rnd = seeded(n + 3);
+  const pts = Array.from({ length: n }, (_, i) => {
+    const dow = (i + 2) % 7;
+    return 5200 + (dow >= 5 ? 2600 : 0) + rnd() * 1800 + i * (n > 30 ? 12 : 30);
+  });
+  const avg = pts.map((_, i) => { const s = pts.slice(Math.max(0, i - 6), i + 1); return s.reduce((a, b) => a + b, 0) / s.length; });
+  const W = 340, H = 160, L = 34, B = 18;
+  const max = Math.max(...pts) * 1.05, min = Math.min(...pts) * 0.85;
+  const x = i => L + i * (W - L - 6) / (n - 1), y = v => H - B - (v - min) / (max - min) * (H - B - 8);
+  const path = arr => arr.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
+  let grid = "";
+  [0, 0.5, 1].forEach(t => { const v = min + (max - min) * t; grid += `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="#f3f4f6"/><text x="0" y="${y(v) + 3}" font-size="9" fill="#9ca3af">${(v / 1000).toFixed(1)}k</text>`; });
+  $("trendChart").innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%">${grid}
+    <path d="${path(pts)} L${x(n - 1)},${H - B} L${x(0)},${H - B}Z" fill="rgba(17,24,39,.06)"/>
+    <path d="${path(pts)}" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="${path(avg)}" fill="none" stroke="#b9824f" stroke-width="2.5" stroke-dasharray="5 3"/>
+    <text x="${L}" y="${H - 3}" font-size="9" fill="#6b7280">${n} days ago</text><text x="${W}" y="${H - 3}" font-size="9" text-anchor="end" fill="#6b7280">Today</text></svg>`;
+  $("trendSub").textContent = range === 1 ? "Last 14 days (pick 30 or 90 days for longer)" : `Last ${n} days`;
+}
+
+/* ---------- 4 menu ---------- */
+let itemView = "qty";
+const ITEMS = [["Latte", 14, 180, "coffee"], ["Cappuccino", 9, 170, "coffee"], ["Masala Chai", 11, 80, "tea"], ["Americano", 7, 140, "coffee"],
+  ["Croissant", 6, 150, "bites"], ["Cold Brew", 5, 200, "special"], ["Brownie", 5, 120, "bites"], ["Espresso Shot", 4, 120, "coffee"],
+  ["Hot Chocolate", 3, 130, "special"], ["Matcha Latte", 3, 230, "special"]];
+function menu() {
+  const m = range;
+  const rows = ITEMS.map(([n, q, p, c]) => [n, itemView === "qty" ? q * m : q * p * m, css(c)])
+    .sort((a, b) => b[1] - a[1]);
+  hbars("topItems", rows, "", itemView === "rev");
+  split("catSplit", "catLegend", [["Coffee", 60, css("coffee")], ["Tea", 15, css("tea")], ["Bites", 17, css("bites")], ["Specialty", 8, css("special")]]);
+  split("tempSplit", "tempLegend", [["Hot", 58, "#b45309"], ["Iced", 42, "#0284c7"]]);
+  split("brewSplit", "brewLegend", [["Moka", 64, css("coffee")], ["Flair 58", 36, css("milk")]]);
+  hbars("flavours", [["Hazelnut", 23 * 20 * m], ["Caramel", 18 * 20 * m], ["Vanilla", 12 * 20 * m], ["Irish Cream", 6 * 20 * m]], css("milk"), true);
+}
+
+/* ---------- 5 customers ---------- */
+function customers() {
+  const m = range;
+  const rows = [["New", 14 * m, 152, "new"], ["Repeat", 13 * m, 181, "repeat"], ["Regular", 11 * m, 230, "regular"]];
+  split("custSplit", "custLegend", rows.map(r => [r[0], r[1] * r[2], css(r[3])]));
+  $("custTable").innerHTML = rows.map(r => `<tr><td><i style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${css(r[3])};margin-right:6px"></i>${r[0]}</td>
+    <td class="r">${r[1]}</td><td class="r">${fmt(r[1] * r[2])}</td><td class="r"><b>${fmt(r[2])}</b></td></tr>`).join("");
+}
+
+/* ---------- 7 speed ---------- */
+function speed() {
+  const mins = [4.5, 5.2, 7.8, 5.5, 5.0, 5.4, 4.2, 4.0, 5.1, 9.6, 11.3, 8.2, 5.6, 4.1];
+  hbars("speedChart", HOURS.map((h, i) => [`${h > 12 ? h - 12 : h}${h >= 12 ? " pm" : " am"}`, mins[i], mins[i] > 8 ? "#b91c1c" : mins[i] > 6 ? "#d97706" : "#15803d"]), "");
+  document.querySelectorAll("#speedChart .val").forEach((el, i) => { const v = mins[i]; el.textContent = `${Math.floor(v)}m ${Math.round((v % 1) * 60)}s`; });
+}
+
+function render() { snapshot(); peak(); trend(); menu(); customers(); speed(); $("gp").textContent = fmt(4610 * range * 0.94); }
+
+$("range").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#range button").forEach(x => x.classList.toggle("on", x === b));
+  range = Number(b.dataset.r); render();
+});
+$("peakTabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#peakTabs button").forEach(x => x.classList.toggle("on", x === b));
+  peakView = b.dataset.v; peak();
+});
+$("itemTabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#itemTabs button").forEach(x => x.classList.toggle("on", x === b));
+  itemView = b.dataset.v; menu();
+});
+function toast(t) { const el = $("toast"); el.textContent = t; el.style.display = "block"; setTimeout(() => el.style.display = "none", 1800); }
+render();
+</script>
+</body>
+</html>
