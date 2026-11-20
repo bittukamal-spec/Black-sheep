@@ -17,3 +17,6 @@
 
 ## Expenses & profit
 - `expenses.html` / `expenses.png`: Admin → Expenses: list, quick add, partners, profit & loss.
+
+## Inventory
+- `inventory.html` / `inventory.png`: Stock tab: board, item actions, waste, shopping list, wastage report, recipes, stock-in via Expenses, setup.

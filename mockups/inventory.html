@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventory Mockups</title>
+<style>
+  :root { --ink:#111827; --ink2:#1f2937; --muted:#4b5563; --line:#e5e7eb; --soft:#f3f4f6; --ok:#16a34a; --low:#d97706; --out:#dc2626; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#e5e7eb; color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  h1 { font-size:20px; margin:20px 20px 4px; }
+  .lead { margin:0 20px 16px; color:#374151; font-size:14px; max-width:1100px; }
+  .row { display:flex; flex-wrap:wrap; gap:24px; padding:0 20px 30px; align-items:flex-start; }
+  .label { font-weight:800; font-size:15px; margin-bottom:8px; }
+  .phone { width:375px; height:780px; background:#f9fafb; border-radius:28px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.18); position:relative; }
+  .cap { width:375px; font-size:13px; color:#374151; margin-top:8px; line-height:1.45; }
+  .cap b { color:var(--ink); }
+  .scroll { position:absolute; inset:0 0 64px 0; overflow:hidden; }
+  nav { position:absolute; bottom:0; left:0; right:0; height:64px; background:#fff; border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); }
+  nav span { display:grid; place-items:center; font-size:12px; font-weight:600; color:#6b7280; }
+  nav span.on { color:var(--ink); font-weight:800; }
+  .head { padding:16px 16px 6px; display:flex; justify-content:space-between; align-items:center; }
+  .head h2 { margin:0; font-size:22px; }
+  .seg { display:flex; margin:6px 16px 10px; background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:4px; }
+  .seg span { flex:1; text-align:center; padding:7px 0; border-radius:9px; font-size:13px; font-weight:700; color:var(--muted); }
+  .seg span.on { background:#fff; color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.08); }
+  .sum { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 16px 10px; }
+  .sum div { border-radius:12px; padding:9px 10px; }
+  .sum b { display:block; font-size:22px; font-weight:900; }
+  .sum small { font-size:12px; font-weight:700; }
+  .chips { display:flex; gap:6px; margin:0 16px 8px; overflow:hidden; flex-wrap:nowrap; }
+  .chip { flex-shrink:0; border:1.5px solid #d1d5db; border-radius:999px; padding:5px 11px; font-size:12.5px; font-weight:700; color:var(--ink2); background:#fff; white-space:nowrap; }
+  .chip.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .cat { margin:10px 16px 2px; font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+  .it { display:flex; align-items:center; gap:10px; margin:0 16px; padding:9px 0; border-bottom:1px solid var(--soft); }
+  .dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .it .info { flex:1; min-width:0; }
+  .it .nm { font-weight:700; font-size:15px; }
+  .it .sub { font-size:12px; color:var(--muted); margin-top:2px; }
+  .bar { height:6px; border-radius:3px; background:var(--soft); margin-top:5px; overflow:hidden; }
+  .bar i { display:block; height:100%; border-radius:3px; }
+  .qty { text-align:right; }
+  .qty b { font-size:16px; font-weight:900; }
+  .qty small { display:block; font-size:11px; color:var(--muted); font-weight:600; }
+  .pm { display:flex; gap:4px; }
+  .pm span { width:30px; height:30px; border-radius:50%; border:1.5px solid #d1d5db; display:grid; place-items:center; font-weight:800; font-size:16px; background:#fff; }
+  .fab { position:absolute; right:16px; bottom:80px; display:flex; gap:8px; }
+  .fab span { border-radius:999px; padding:12px 16px; font-weight:800; font-size:14px; box-shadow:0 6px 16px rgba(0,0,0,.2); }
+
+  .dim { position:absolute; inset:0; background:rgba(0,0,0,.45); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:18px 18px 0 0; padding:16px 18px 20px; }
+  .sh-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .sh-top b { font-size:19px; }
+  .sec { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin:14px 0 6px; }
+  .acts { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+  .act { border-radius:14px; padding:12px; font-weight:800; font-size:15px; }
+  .act small { display:block; font-size:12px; font-weight:600; opacity:.85; margin-top:2px; }
+  .note { background:#fef3c7; color:#78350f; border-radius:12px; padding:10px 12px; font-size:13px; margin-top:12px; }
+  .hist div { display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--soft); }
+  .hist small { color:var(--muted); }
+  .big { font-size:30px; font-weight:900; }
+  .rchips { display:flex; flex-wrap:wrap; gap:6px; }
+  .rchips span { border:1.5px solid #d1d5db; border-radius:999px; padding:6px 11px; font-size:13px; font-weight:700; }
+  .rchips span.on { background:var(--out); border-color:var(--out); color:#fff; }
+  .save { margin-top:14px; height:50px; border-radius:12px; background:var(--ink); color:#fff; display:flex; justify-content:center; align-items:center; font-weight:800; font-size:16px; }
+
+  .sup { margin:0 16px 12px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:12px 14px; }
+  .sup .t { display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:15px; margin-bottom:6px; }
+  .sup .t small { font-weight:600; color:var(--muted); font-size:12px; }
+  .li { display:flex; align-items:center; gap:8px; padding:6px 0; font-size:14px; border-bottom:1px solid var(--soft); }
+  .li:last-of-type { border-bottom:0; }
+  .box { width:18px; height:18px; border-radius:5px; border:2px solid #d1d5db; flex-shrink:0; }
+  .box.on { background:var(--ok); border-color:var(--ok); }
+  .li .q { margin-left:auto; font-weight:800; }
+  .wa { margin-top:8px; background:#22c55e; color:#fff; border-radius:10px; text-align:center; padding:9px 0; font-weight:800; font-size:14px; }
+  .rec { margin-top:8px; border:2px solid var(--ink); border-radius:10px; text-align:center; padding:8px 0; font-weight:800; font-size:14px; }
+
+  .card { margin:0 16px 12px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; }
+  .ing { display:grid; grid-template-columns:1fr 70px 50px; gap:6px; align-items:center; font-size:14px; padding:6px 0; border-bottom:1px solid var(--soft); }
+  .ing .a { text-align:right; font-weight:800; }
+  .ing .c { text-align:right; color:var(--muted); font-size:12px; font-weight:600; }
+  .vtabs { display:flex; gap:6px; margin-bottom:8px; }
+  .vtabs span { padding:5px 12px; border-radius:999px; font-size:13px; font-weight:800; }
+  .hot { background:#ffedd5; color:#9a3412; } .iced { background:#e0f2fe; color:#075985; }
+  .tot { display:flex; justify-content:space-between; margin-top:10px; font-weight:800; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:800; background:#dcfce7; color:#15803d; }
+  .hb { display:grid; grid-template-columns:110px 1fr 56px; gap:8px; align-items:center; font-size:13px; margin:6px 0; }
+  .hb .tr { height:11px; border-radius:6px; background:var(--soft); overflow:hidden; }
+  .hb .f { height:100%; border-radius:6px; }
+  .hb .v { text-align:right; font-weight:800; }
+  .kp { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .kp div { background:var(--soft); border-radius:12px; padding:10px; }
+  .kp small { font-size:12px; color:var(--muted); font-weight:700; display:block; }
+  .kp b { font-size:22px; font-weight:900; }
+  .split { display:flex; height:12px; border-radius:6px; overflow:hidden; margin:8px 0 6px; }
+  .legend { display:flex; flex-wrap:wrap; gap:4px 12px; font-size:12px; color:var(--ink2); }
+  .legend i { display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:4px; }
+</style>
+</head>
+<body>
+<h1>Inventory mockups</h1>
+<p class="lead">A new <b>Stock</b> tab in the bottom bar (used every day, so it's not hidden in Admin). Stock goes up when you buy, goes down by itself from sales using <b>recipes</b>, and you correct it with one tap when something <b>finishes</b>. The difference between what the app expected and reality is your wastage. All numbers are examples.</p>
+
+<div class="row">
+  <!-- A: board -->
+  <div>
+    <div class="label">A · Stock board</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Stock</h2><span class="chip">⚙︎ Items &amp; recipes</span></div>
+        <div class="seg"><span class="on">Stock</span><span>To buy · 4</span><span>Wastage</span></div>
+        <div class="sum">
+          <div style="background:#fee2e2;color:#991b1b"><b>1</b><small>Out</small></div>
+          <div style="background:#fef3c7;color:#92400e"><b>3</b><small>Low</small></div>
+          <div style="background:#fce7f3;color:#9d174d"><b>1</b><small>Expiring</small></div>
+        </div>
+        <div class="chips"><span class="chip on">All</span><span class="chip">🥛 Dairy</span><span class="chip">☕ Coffee</span><span class="chip">🍯 Syrups</span><span class="chip">🥤 Packaging</span><span class="chip">🍪 Food</span></div>
+        <div class="cat">Dairy</div>
+        <div class="it"><span class="dot" style="background:var(--low)"></span><div class="info"><div class="nm">Milk (full cream)</div><div class="sub">~1 day left · expires tomorrow</div><div class="bar"><i style="width:22%;background:var(--low)"></i></div></div><div class="qty"><b>4.4 L</b><small>min 5 L</small></div></div>
+        <div class="cat">Coffee</div>
+        <div class="it"><span class="dot" style="background:var(--ok)"></span><div class="info"><div class="nm">Coffee beans (house blend)</div><div class="sub">~9 days left</div><div class="bar"><i style="width:70%;background:var(--ok)"></i></div></div><div class="qty"><b>1.6 kg</b><small>min 0.5 kg</small></div></div>
+        <div class="cat">Syrups</div>
+        <div class="it"><span class="dot" style="background:var(--out)"></span><div class="info"><div class="nm">Hazelnut syrup</div><div class="sub">Finished today</div><div class="bar"><i style="width:0"></i></div></div><div class="qty"><b>0</b><small>bottles</small></div></div>
+        <div class="it"><span class="dot" style="background:var(--low)"></span><div class="info"><div class="nm">Caramel syrup</div><div class="sub">~3 days left</div><div class="bar"><i style="width:25%;background:var(--low)"></i></div></div><div class="qty"><b>0.3</b><small>bottles</small></div></div>
+        <div class="cat">Packaging</div>
+        <div class="it"><span class="dot" style="background:var(--low)"></span><div class="info"><div class="nm">Cups 12 oz</div><div class="sub">~2 days left</div><div class="bar"><i style="width:18%;background:var(--low)"></i></div></div><div class="qty"><b>38</b><small>min 50 pcs</small></div></div>
+        <div class="it"><span class="dot" style="background:var(--ok)"></span><div class="info"><div class="nm">Lids 12 oz</div><div class="sub">~6 days left</div><div class="bar"><i style="width:60%;background:var(--ok)"></i></div></div><div class="qty"><b>140</b><small>pcs</small></div></div>
+      </div>
+      <div class="fab"><span style="background:#fff;color:#b91c1c;border:2px solid #fecaca">🗑 Waste</span><span style="background:var(--ink);color:#fff">+ Stock in</span></div>
+      <nav><span>POS</span><span>Orders</span><span class="on">Stock</span><span>Sales</span><span>Admin</span></nav>
+    </div>
+    <div class="cap">Green OK, amber low, red out. <b>Days left</b> comes from how fast it's been used. Tap any item for actions. Stock goes down by itself from sales (recipes, F) so you rarely touch it.</div>
+  </div>
+
+  <!-- B: item sheet -->
+  <div>
+    <div class="label">B · Tap an item</div>
+    <div class="phone">
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="sh-top"><div><b>Milk (full cream)</b><div style="font-size:13px;color:#4b5563;margin-top:2px">Dairy · Amul dairy · ₹66 / L</div></div><span style="font-size:22px">×</span></div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-top:10px"><span class="big">4.4 L</span><span style="color:#92400e;font-weight:800;font-size:13px">LOW · min 5 L</span></div>
+        <div class="acts">
+          <div class="act" style="background:var(--ink);color:#fff">+ Received<small>Add a delivery</small></div>
+          <div class="act" style="background:#fee2e2;color:#991b1b">It's finished<small>Set to 0 now</small></div>
+          <div class="act" style="background:#fff;border:2px solid #fecaca;color:#b91c1c">🗑 Waste<small>Spilled, expired…</small></div>
+          <div class="act" style="background:var(--soft);color:var(--ink)">Count<small>Type what's left</small></div>
+        </div>
+        <div class="note"><b>When you tap "It's finished":</b> the app expected 0.9 L left, so 0.9 L (₹59) is marked as <b>unaccounted</b> in Wastage. If it ran out early, that's spillage or extra milk per drink.</div>
+        <div class="sec">History</div>
+        <div class="hist">
+          <div><span>Today · used by 22 drinks</span><small>−4.6 L</small></div>
+          <div><span>Today · Waste: spilled</span><small>−0.5 L</small></div>
+          <div><span>Yesterday · Received (Bittu)</span><b>+20 L</b></div>
+          <div><span>Yesterday · used by 31 drinks</span><small>−6.2 L</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="cap">The 4 things you ever do with stock. <b>It's finished</b> is your "count whenever it runs out": one tap, and the app learns the real usage. <b>Count</b> is there for any time you want to check.</div>
+  </div>
+
+  <!-- C: waste -->
+  <div>
+    <div class="label">C · Log waste (3 taps)</div>
+    <div class="phone">
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="sh-top"><b>Log waste</b><span style="font-size:22px">×</span></div>
+        <div class="sec">Item</div>
+        <div class="rchips"><span style="background:var(--ink);color:#fff;border-color:var(--ink)">Milk</span><span>Croissant</span><span>Beans</span><span>Cups 12 oz</span><span>🔍 Other</span></div>
+        <div class="sec">How much</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="pm" style="gap:8px"><span>−</span></span><span class="big">0.5 L</span><span class="pm"><span>+</span></span>
+          <span class="chip" style="margin-left:auto">250 ml</span><span class="chip">1 L</span>
+        </div>
+        <div class="sec">Why</div>
+        <div class="rchips"><span class="on">Spilled</span><span>Expired</span><span>Remade drink</span><span>Staff drink</span><span>Sample / free</span><span>Other</span></div>
+        <div style="margin-top:12px;font-size:13px;color:#4b5563">Cost of this waste: <b style="color:#111827">₹33</b></div>
+        <div class="save">Save waste</div>
+      </div>
+    </div>
+    <div class="cap">Recent items show first. Reason chips make the Wastage report useful (E): you'll see whether money goes on spills, expiry or remakes.</div>
+  </div>
+
+  <!-- D: to buy -->
+  <div>
+    <div class="label">D · To buy (shopping list)</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Stock</h2></div>
+        <div class="seg"><span>Stock</span><span class="on">To buy · 4</span><span>Wastage</span></div>
+        <div class="sup">
+          <div class="t"><span>📱 Amul dairy</span><small>WhatsApp</small></div>
+          <div class="li"><span class="box"></span>Milk (full cream)<span class="q">20 L</span></div>
+          <div class="wa">Send order on WhatsApp</div>
+        </div>
+        <div class="sup">
+          <div class="t"><span>📱 Bean Co. roasters</span><small>WhatsApp</small></div>
+          <div class="li"><span class="box"></span>Hazelnut syrup<span class="q">2 bottles</span></div>
+          <div class="li"><span class="box"></span>Caramel syrup<span class="q">1 bottle</span></div>
+          <div class="wa">Send order on WhatsApp</div>
+        </div>
+        <div class="sup">
+          <div class="t"><span>🛒 Buy in person</span><small>market / D-Mart</small></div>
+          <div class="li"><span class="box on"></span>Cups 12 oz<span class="q">2 boxes (100)</span></div>
+          <div class="li"><span class="box"></span>Napkins<span class="q">1 pack</span></div>
+          <div class="rec">Mark ticked items as received</div>
+        </div>
+        <div style="margin:0 16px;font-size:12px;color:#4b5563">Quantities fill each item back up to its "order-up-to" level, rounded to the pack size.</div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span class="on">Stock</span><span>Sales</span><span>Admin</span></nav>
+    </div>
+    <div class="cap">Everything low or out, grouped by where you buy it. WhatsApp suppliers get a ready message ("Hi, please send: Milk 20 L…"). For market runs, tick items as you shop, then <b>mark received</b>: stock goes up and it offers to log the expense.</div>
+  </div>
+
+  <!-- E: wastage -->
+  <div>
+    <div class="label">E · Wastage report</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Stock</h2></div>
+        <div class="seg"><span>Stock</span><span>To buy · 4</span><span class="on">Wastage</span></div>
+        <div style="margin:0 16px 10px;font-weight:800">November 2026</div>
+        <div class="card">
+          <div class="kp"><div><small>Wasted this month</small><b>₹2,340</b></div><div><small>Of all stock used</small><b>4.1%</b></div></div>
+          <div style="font-size:13px;font-weight:700;color:#4b5563;margin-top:12px">Logged vs unaccounted</div>
+          <div class="split"><div style="width:62%;background:#dc2626"></div><div style="width:38%;background:#9ca3af"></div></div>
+          <div class="legend"><span><i style="background:#dc2626"></i>Logged waste ₹1,450</span><span><i style="background:#9ca3af"></i>Unaccounted ₹890</span></div>
+        </div>
+        <div class="card">
+          <div style="font-size:13px;font-weight:700;color:#4b5563;margin-bottom:4px">Top wasted items</div>
+          <div class="hb"><span>Milk</span><div class="tr"><div class="f" style="width:100%;background:#0284c7"></div></div><span class="v">₹980</span></div>
+          <div class="hb"><span>Croissant</span><div class="tr"><div class="f" style="width:62%;background:#a16207"></div></div><span class="v">₹600</span></div>
+          <div class="hb"><span>Coffee beans</span><div class="tr"><div class="f" style="width:42%;background:#5b3a29"></div></div><span class="v">₹410</span></div>
+          <div class="hb"><span>Cups 12 oz</span><div class="tr"><div class="f" style="width:18%;background:#d97706"></div></div><span class="v">₹180</span></div>
+        </div>
+        <div class="card">
+          <div style="font-size:13px;font-weight:700;color:#4b5563;margin-bottom:4px">Why</div>
+          <div class="hb"><span>Expired</span><div class="tr"><div class="f" style="width:100%;background:#dc2626"></div></div><span class="v">₹720</span></div>
+          <div class="hb"><span>Spilled</span><div class="tr"><div class="f" style="width:55%;background:#dc2626"></div></div><span class="v">₹400</span></div>
+          <div class="hb"><span>Remade drink</span><div class="tr"><div class="f" style="width:46%;background:#dc2626"></div></div><span class="v">₹330</span></div>
+        </div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span class="on">Stock</span><span>Sales</span><span>Admin</span></nav>
+    </div>
+    <div class="cap"><b>Logged</b> = what you recorded with the Waste button. <b>Unaccounted</b> = items that ran out earlier than the recipes said (found when you tap "It's finished"). A good café target is under 5%.</div>
+  </div>
+
+  <!-- F: recipe -->
+  <div>
+    <div class="label">F · Recipe for a menu item</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Latte · recipe</h2><span style="font-size:22px">×</span></div>
+        <div class="card">
+          <div class="vtabs"><span class="hot">Hot ₹120</span><span style="color:#4b5563">Iced ₹140</span></div>
+          <div class="ing"><span>Milk (full cream)</span><span class="a">200 ml</span><span class="c">₹13</span></div>
+          <div class="ing"><span>Coffee beans</span><span class="a">18 g</span><span class="c">₹32</span></div>
+          <div class="ing"><span>Cups 12 oz</span><span class="a">1</span><span class="c">₹4</span></div>
+          <div class="ing"><span>Lids 12 oz</span><span class="a">1</span><span class="c">₹1.5</span></div>
+          <div style="margin-top:8px;color:#1e40af;font-weight:800;font-size:14px">+ Add ingredient</div>
+          <div class="tot"><span>Cost to make</span><span>₹50.5</span></div>
+          <div class="tot" style="margin-top:4px"><span>Margin</span><span class="pill">58%</span></div>
+        </div>
+        <div class="card">
+          <div style="font-weight:800;font-size:14px;margin-bottom:4px">Shared rules (set once)</div>
+          <div class="ing"><span>Each flavour adds</span><span class="a">15 ml</span><span class="c">of that syrup</span></div>
+          <div class="ing"><span>Iced drinks add</span><span class="a">150 g</span><span class="c">ice</span></div>
+          <div class="ing"><span>Brew method</span><span class="a">same</span><span class="c">beans</span></div>
+        </div>
+        <div style="margin:0 16px;font-size:12.5px;color:#374151;line-height:1.45">Iced tab: copy Hot, then change the cup and milk. Items without a recipe still sell normally; they just don't reduce stock.</div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span class="on">Stock</span><span>Sales</span><span>Admin</span></nav>
+    </div>
+    <div class="cap">Each sale reduces stock by its recipe, plus syrup for each flavour. The <b>cost to make</b> is worked out from your last purchase prices and replaces the manual "Cost ₹" box, so Sales → Profit stays accurate by itself.</div>
+  </div>
+
+  <!-- G: stock in -->
+  <div>
+    <div class="label">G · Stock in (linked to Expenses)</div>
+    <div class="phone">
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="sh-top"><b>Add expense</b><span style="font-size:22px">×</span></div>
+        <div style="text-align:center" class="big">₹1,320</div>
+        <div class="sec">Category</div>
+        <div class="rchips"><span style="background:var(--ink);color:#fff;border-color:var(--ink)">🥛 Milk &amp; dairy</span><span>☕ Beans</span><span>🥤 Cups</span></div>
+        <div class="sec">Paid by</div>
+        <div class="rchips"><span style="background:#1e40af;color:#fff;border-color:#1e40af">Bittu · this phone</span><span>Till cash</span><span>Manna</span></div>
+        <div class="sec" style="color:#15803d">Add to stock</div>
+        <div style="border:2px solid #86efac;background:#f0fdf4;border-radius:12px;padding:10px 12px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700"><span class="box on"></span>Milk (full cream)<span style="margin-left:auto;font-weight:900">20 L</span></div>
+          <div style="font-size:12px;color:#4b5563;margin-top:4px">₹66 / L · new stock 24.4 L · expires 23 Nov</div>
+          <div style="color:#1e40af;font-weight:800;font-size:13px;margin-top:6px">+ Add another item</div>
+        </div>
+        <div class="save">Save expense &amp; stock</div>
+      </div>
+    </div>
+    <div class="cap">Buying something is <b>one step</b>: the expense and the stock update together, and the price per unit is saved for recipe costs. The "+ Stock in" button on the board does the same for things already paid for.</div>
+  </div>
+
+  <!-- H: setup -->
+  <div>
+    <div class="label">H · Before you open: set up items</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Items &amp; recipes</h2><span style="font-size:22px">×</span></div>
+        <div class="seg"><span class="on">Items</span><span>Recipes · 6/14</span><span>Suppliers</span></div>
+        <div class="card" style="background:#eff6ff;border-color:#bfdbfe">
+          <div style="font-weight:800">Quick start</div>
+          <div style="font-size:13px;color:#1f2937;margin-top:4px">Tap the common café items you stock. Units, pack sizes and minimums are filled in; you just type how much you have now.</div>
+          <div class="rchips" style="margin-top:8px"><span class="on" style="background:#1e40af;border-color:#1e40af">✓ Milk</span><span class="on" style="background:#1e40af;border-color:#1e40af">✓ Coffee beans</span><span class="on" style="background:#1e40af;border-color:#1e40af">✓ Cups 12 oz</span><span>Cups 16 oz</span><span class="on" style="background:#1e40af;border-color:#1e40af">✓ Lids</span><span>Straws</span><span>Sugar</span><span>Ice</span><span>Napkins</span><span>+ Your own</span></div>
+        </div>
+        <div class="cat">Opening stock</div>
+        <div class="it"><div class="info"><div class="nm">Milk (full cream)</div><div class="sub">L · pack 1 L · min 5 · order up to 20</div></div><div class="qty"><b style="border:1.5px solid #d1d5db;border-radius:8px;padding:4px 10px">10</b></div></div>
+        <div class="it"><div class="info"><div class="nm">Coffee beans</div><div class="sub">kg · pack 1 kg · min 0.5 · up to 3</div></div><div class="qty"><b style="border:1.5px solid #d1d5db;border-radius:8px;padding:4px 10px">2</b></div></div>
+        <div class="it"><div class="info"><div class="nm">Cups 12 oz</div><div class="sub">pcs · box of 50 · min 50 · up to 300</div></div><div class="qty"><b style="border:1.5px solid #d1d5db;border-radius:8px;padding:4px 10px">200</b></div></div>
+        <div class="it"><div class="info"><div class="nm">Lids 12 oz</div><div class="sub">pcs · box of 100 · min 50 · up to 300</div></div><div class="qty"><b style="border:1.5px solid #d1d5db;border-radius:8px;padding:4px 10px">200</b></div></div>
+        <div style="margin:10px 16px;font-size:12.5px;color:#374151">Recipes · <b>6 of 14</b> menu items done. Items without one still sell, they just won't reduce stock.</div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span class="on">Stock</span><span>Sales</span><span>Admin</span></nav>
+    </div>
+    <div class="cap">Since you're opening in a few days: pick items from a starter list, type what you have, add recipes for your main drinks, and add suppliers (name, WhatsApp number). About 20 minutes once.</div>
+  </div>
+</div>
+</body>
+</html>
