@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Hub Mockups</title>
+<style>
+  :root { --ink:#111827; --ink2:#1f2937; --muted:#4b5563; --line:#e5e7eb; --soft:#f3f4f6; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#e5e7eb; color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  h1 { font-size:20px; margin:20px 20px 4px; }
+  .lead { margin:0 20px 16px; color:#374151; font-size:14px; max-width:1150px; line-height:1.5; }
+  .row { display:flex; flex-wrap:wrap; gap:24px; padding:0 20px 30px; align-items:flex-start; }
+  .label { font-weight:800; font-size:15px; margin-bottom:8px; }
+  .phone { width:375px; height:780px; background:#f9fafb; border-radius:28px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.18); position:relative; }
+  .cap { width:375px; font-size:13px; color:#374151; margin-top:8px; line-height:1.45; }
+  .cap b { color:var(--ink); }
+  nav { position:absolute; bottom:0; left:0; right:0; height:64px; background:#fff; border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(3,1fr); }
+  nav span { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-size:12px; font-weight:600; color:#6b7280; }
+  nav span i { font-style:normal; font-size:20px; }
+  nav span.on { color:var(--ink); font-weight:800; }
+  .hd { padding:16px 16px 8px; }
+  .hd h2 { margin:0; font-size:24px; }
+  .hd p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+  .alert { margin:6px 16px 12px; display:flex; gap:6px; overflow:hidden; }
+  .alert span { flex-shrink:0; border-radius:999px; padding:6px 11px; font-size:12.5px; font-weight:800; }
+  .tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 16px; }
+  .tile { border-radius:18px; padding:14px; color:#fff; min-height:132px; display:flex; flex-direction:column; justify-content:space-between; position:relative; }
+  .tile .ic { font-size:24px; }
+  .tile b { font-size:17px; display:block; }
+  .tile .k { font-size:21px; font-weight:900; margin-top:2px; }
+  .tile small { display:block; font-size:12px; opacity:.88; font-weight:600; }
+  .badge { position:absolute; top:12px; right:12px; background:#fff; color:#b91c1c; border-radius:999px; padding:2px 8px; font-size:11.5px; font-weight:900; }
+  .top { display:flex; align-items:center; gap:10px; padding:14px 16px 8px; }
+  .back { width:36px; height:36px; border-radius:50%; border:1px solid var(--line); background:#fff; display:grid; place-items:center; font-size:18px; }
+  .top h2 { margin:0; font-size:22px; }
+  .tabs { display:flex; gap:6px; padding:4px 16px 10px; overflow:hidden; border-bottom:1px solid var(--line); background:#f9fafb; }
+  .tabs span { flex-shrink:0; padding:8px 14px; border-radius:999px; font-size:14px; font-weight:800; color:var(--muted); background:#fff; border:1.5px solid var(--line); white-space:nowrap; }
+  .tabs span.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .swipe { text-align:center; font-size:11.5px; color:#6b7280; font-weight:700; padding:6px 0 0; }
+  .panes { position:relative; height:520px; overflow:hidden; }
+  .pane { position:absolute; top:0; bottom:0; width:100%; padding:12px 16px; }
+  .peek { left:92%; opacity:.45; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-bottom:10px; }
+  .it { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--soft); font-size:14px; }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .it .q { margin-left:auto; font-weight:800; }
+  .kp { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .kp div { background:var(--soft); border-radius:12px; padding:10px; }
+  .kp small { font-size:12px; color:var(--muted); font-weight:700; display:block; }
+  .kp b { font-size:22px; font-weight:900; }
+  .bars { display:flex; align-items:flex-end; gap:5px; height:90px; margin-top:8px; }
+  .bars i { flex:1; background:#111827; border-radius:3px 3px 0 0; display:block; }
+  .set { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--soft); font-size:14.5px; font-weight:700; }
+  .set small { display:block; font-weight:500; color:var(--muted); font-size:12px; }
+  .tog { width:44px; height:26px; border-radius:999px; background:#111827; position:relative; }
+  .tog::after { content:""; position:absolute; right:3px; top:3px; width:20px; height:20px; border-radius:50%; background:#fff; }
+  .chip { border:1.5px solid #d1d5db; border-radius:999px; padding:4px 10px; font-size:12.5px; font-weight:800; }
+  table.map { border-collapse:collapse; background:#fff; border-radius:16px; overflow:hidden; font-size:13.5px; width:375px; box-shadow:0 8px 30px rgba(0,0,0,.12); }
+  table.map th, table.map td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--soft); vertical-align:top; }
+  table.map th { background:#111827; color:#fff; font-size:12.5px; }
+  table.map td:first-child { color:#6b7280; }
+  table.map td b { color:var(--ink); }
+</style>
+</head>
+<body>
+<h1>New Admin layout</h1>
+<p class="lead">The bottom bar keeps only the 3 things used all day: <b>POS · Orders · Admin</b>. Admin opens on a <b>home screen of big tiles</b>, one per area, each showing a live number. Tapping a tile opens that area with its own <b>tabs that you can swipe</b> left and right. Staff is removed. Everything else keeps working exactly as now, just in a clearer place. Numbers are examples.</p>
+
+<div class="row">
+  <!-- A -->
+  <div>
+    <div class="label">A · Admin home</div>
+    <div class="phone">
+      <div class="hd"><h2>Admin</h2><p>Black Sheep · Fri 21 Nov</p></div>
+      <div class="alert"><span style="background:#fee2e2;color:#991b1b">🔴 Milk out</span><span style="background:#fef3c7;color:#92400e">🟠 3 items low</span><span style="background:#fce7f3;color:#9d174d">2 preparing</span></div>
+      <div class="tiles">
+        <div class="tile" style="background:#111827"><span class="ic">📊</span><div><b>Sales</b><div class="k">₹6,780</div><small>today · 38 orders</small></div></div>
+        <div class="tile" style="background:#0f766e"><span class="badge">1 out</span><span class="ic">📦</span><div><b>Stock</b><div class="k">3 low</div><small>4 to buy</small></div></div>
+        <div class="tile" style="background:#9d174d"><span class="ic">💸</span><div><b>Money</b><div class="k">₹38,450</div><small>spent this month</small></div></div>
+        <div class="tile" style="background:#5b3a29"><span class="ic">☕</span><div><b>Menu</b><div class="k">24 items</div><small>4 flavours</small></div></div>
+        <div class="tile" style="background:#1e40af"><span class="ic">👥</span><div><b>Customers</b><div class="k">148</div><small>37 regulars</small></div></div>
+        <div class="tile" style="background:#4b5563"><span class="ic">⚙️</span><div><b>Settings</b><div class="k" style="font-size:16px">PIN on</div><small>this phone: Bittu</small></div></div>
+      </div>
+      <nav><span><i>🛍</i>POS</span><span><i>📋</i>Orders</span><span class="on"><i>⚙︎</i>Admin</span></nav>
+    </div>
+    <div class="cap">Six big tiles instead of six tiny tabs plus two extra pages. The coloured strip at the top shows anything that needs attention (tap it to jump there). Tiles are in order of daily use.</div>
+  </div>
+
+  <!-- B -->
+  <div>
+    <div class="label">B · Inside a tile: Stock</div>
+    <div class="phone">
+      <div class="top"><span class="back">‹</span><h2>📦 Stock</h2></div>
+      <div class="tabs"><span class="on">Stock</span><span>To buy · 4</span><span>Wastage</span><span>Items</span><span>Recipes</span><span>Suppliers</span></div>
+      <div class="swipe">← swipe for more →</div>
+      <div class="panes">
+        <div class="pane">
+          <div class="card" style="display:flex;gap:8px;padding:8px">
+            <div style="flex:1;background:#fee2e2;border-radius:10px;padding:8px;color:#991b1b;font-weight:900">1<br><small style="font-size:11px">Out</small></div>
+            <div style="flex:1;background:#fef3c7;border-radius:10px;padding:8px;color:#92400e;font-weight:900">3<br><small style="font-size:11px">Low</small></div>
+            <div style="flex:1;background:#fce7f3;border-radius:10px;padding:8px;color:#9d174d;font-weight:900">1<br><small style="font-size:11px">Expiring</small></div>
+          </div>
+          <div class="it"><span class="dot" style="background:#dc2626"></span>Milk<span class="q">0 L</span></div>
+          <div class="it"><span class="dot" style="background:#16a34a"></span>Coffee beans<span class="q">1.6 kg</span></div>
+          <div class="it"><span class="dot" style="background:#d97706"></span>Caramel syrup<span class="q">220 ml</span></div>
+          <div class="it"><span class="dot" style="background:#d97706"></span>Cups 12 oz<span class="q">38 pcs</span></div>
+          <div class="it"><span class="dot" style="background:#16a34a"></span>Lids 12 oz<span class="q">140 pcs</span></div>
+        </div>
+        <div class="pane peek"><div class="card"><b>📱 Amul dairy</b><div class="it">Milk<span class="q">20 L</span></div></div></div>
+      </div>
+      <nav><span><i>🛍</i>POS</span><span><i>📋</i>Orders</span><span class="on"><i>⚙︎</i>Admin</span></nav>
+    </div>
+    <div class="cap">Stock's 3 sections and its separate "Items &amp; recipes" screen become <b>6 tabs in one place</b>. Swipe the page left/right (or tap a tab); the tab row scrolls too. The bottom bar stays visible; ‹ goes back to Admin home.</div>
+  </div>
+
+  <!-- C -->
+  <div>
+    <div class="label">C · Sales</div>
+    <div class="phone">
+      <div class="top"><span class="back">‹</span><h2>📊 Sales</h2></div>
+      <div class="tabs"><span class="on">Overview</span><span>Menu</span><span>Customers</span><span>Service</span><span>Profit</span><span>Day end</span></div>
+      <div class="swipe">← swipe for more →</div>
+      <div class="panes"><div class="pane">
+        <div style="display:flex;gap:6px;margin-bottom:10px"><span class="chip" style="background:#111827;color:#fff;border-color:#111827">Today</span><span class="chip">7 days</span><span class="chip">30 days</span><span class="chip">90 days</span></div>
+        <div class="card"><div class="kp"><div><small>Revenue</small><b>₹6,780</b></div><div><small>Orders</small><b>38</b></div><div><small>Average bill</small><b>₹178</b></div><div><small>Cash in drawer</small><b>₹1,860</b></div></div></div>
+        <div class="card"><b style="font-size:14px">Busy hours</b><div class="bars"><i style="height:20%"></i><i style="height:45%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:30%"></i><i style="height:40%"></i><i style="height:25%"></i><i style="height:70%;background:#b91c1c"></i><i style="height:85%;background:#b91c1c"></i><i style="height:50%"></i></div></div>
+      </div></div>
+      <nav><span><i>🛍</i>POS</span><span><i>📋</i>Orders</span><span class="on"><i>⚙︎</i>Admin</span></nav>
+    </div>
+    <div class="cap">The long Sales page is split into tabs: <b>Overview</b> (snapshot, busy hours, trend) · <b>Menu</b> (top items, slow sellers, hot/iced, flavours) · <b>Customers</b> · <b>Service</b> (speed, upselling) · <b>Profit</b> · <b>Day end</b> (closing report, WhatsApp, CSV). The date range stays at the top for all of them.</div>
+  </div>
+
+  <!-- D -->
+  <div>
+    <div class="label">D · Money &amp; Menu</div>
+    <div class="phone">
+      <div class="top"><span class="back">‹</span><h2>💸 Money</h2></div>
+      <div class="tabs"><span class="on">Expenses</span><span>Partners</span><span>Profit &amp; loss</span></div>
+      <div class="panes" style="height:250px"><div class="pane">
+        <div class="card"><small style="color:#4b5563;font-weight:700">Spent this month</small><div style="font-size:26px;font-weight:900">₹38,450</div><div style="display:flex;height:10px;border-radius:5px;overflow:hidden;margin-top:6px"><i style="width:39%;background:#1e40af"></i><i style="width:52%;background:#9d174d"></i><i style="width:9%;background:#d97706"></i></div></div>
+        <div class="it">🥛 Milk 20 L<span class="q">₹1,320</span></div>
+        <div class="it">☕ Coffee beans 2 kg<span class="q">₹3,600</span></div>
+      </div></div>
+      <div class="top" style="border-top:6px solid #e5e7eb;padding-top:14px"><span class="back">‹</span><h2>☕ Menu</h2></div>
+      <div class="tabs"><span class="on">Items</span><span>Flavours</span></div>
+      <div class="panes" style="height:200px"><div class="pane">
+        <div class="it"><b>COFFEE</b><span class="q" style="font-weight:600;color:#1e40af">+ Add item</span></div>
+        <div class="it">Latte<span class="q" style="font-weight:600">Hot ₹120 / Iced ₹140</span></div>
+        <div class="it">Espresso Shot<span class="q" style="font-weight:600">₹80</span></div>
+      </div></div>
+      <nav><span><i>🛍</i>POS</span><span><i>📋</i>Orders</span><span class="on"><i>⚙︎</i>Admin</span></nav>
+    </div>
+    <div class="cap"><b>Money</b> = today's Expenses tab (Expenses · Partners · Profit &amp; loss). <b>Menu</b> = Items (with categories) and <b>Flavours</b> moved inside it. Two separate tiles shown on one phone here to save space.</div>
+  </div>
+
+  <!-- E -->
+  <div>
+    <div class="label">E · Settings</div>
+    <div class="phone">
+      <div class="top"><span class="back">‹</span><h2>⚙️ Settings</h2></div>
+      <div style="padding:6px 16px">
+        <div class="set"><span>PIN login<small>PIN needed on new phones; stays signed in 24 h</small></span><span class="tog"></span></div>
+        <div class="set"><span>This phone belongs to<small>Used for "Paid by" in expenses and stock</small></span><span class="chip" style="background:#1e40af;color:#fff;border-color:#1e40af">Bittu</span></div>
+        <div class="set"><span>Partners<small>Names and roles</small></span><span style="font-size:13px;color:#4b5563">Bittu · Manna ›</span></div>
+        <div class="set"><span>Cash memo<small>Name and footer on WhatsApp memo</small></span><span style="font-size:13px;color:#4b5563">Edit ›</span></div>
+        <div class="set" style="border:0"><span style="color:#b91c1c">Log out of this phone</span><span>›</span></div>
+      </div>
+      <nav><span><i>🛍</i>POS</span><span><i>📋</i>Orders</span><span class="on"><i>⚙︎</i>Admin</span></nav>
+    </div>
+    <div class="cap">All "set once" things in one list: PIN login, <b>which partner owns this phone</b> (now also here, not only in Expenses), partner names, cash memo text, log out. Short, so no tabs needed.</div>
+  </div>
+
+  <!-- F -->
+  <div>
+    <div class="label">F · Where everything moved</div>
+    <table class="map">
+      <tr><th>Before</th><th>After</th></tr>
+      <tr><td>Bottom bar: Sales</td><td><b>Admin → Sales</b></td></tr>
+      <tr><td>Bottom bar: Stock (+ Items &amp; recipes)</td><td><b>Admin → Stock</b> (6 tabs)</td></tr>
+      <tr><td>Admin → Staff</td><td><b>Removed</b> (old orders keep their staff name)</td></tr>
+      <tr><td>Admin → Menu</td><td><b>Admin → Menu → Items</b></td></tr>
+      <tr><td>Admin → Flavours</td><td><b>Admin → Menu → Flavours</b></td></tr>
+      <tr><td>Admin → Expenses</td><td><b>Admin → Money</b> (Expenses · Partners · Profit &amp; loss)</td></tr>
+      <tr><td>Admin → Customers</td><td><b>Admin → Customers</b></td></tr>
+      <tr><td>Admin → Settings</td><td><b>Admin → Settings</b> (+ this phone, partners, memo)</td></tr>
+    </table>
+    <div class="cap">Every screen keeps its own web address (e.g. /pos-admin/stock), so refreshing stays on the same tile and tab, and old links to /sales and /stock open the right place.</div>
+  </div>
+</div>
+</body>
+</html>

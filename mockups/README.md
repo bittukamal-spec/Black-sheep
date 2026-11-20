@@ -23,3 +23,6 @@
 
 ## Billing & customers
 - `billing.html` / `billing.png`: optional phone/name at checkout, WhatsApp cash memo, orders card, Customers list and details.
+
+## Admin hub
+- `admin-hub.html` / `admin-hub.png`: 3-tab bottom bar, Admin home tiles, swipeable tabs per area, where everything moved.
