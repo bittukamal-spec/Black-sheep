@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billing Mockups</title>
+<style>
+  :root { --ink:#111827; --ink2:#1f2937; --muted:#4b5563; --line:#e5e7eb; --soft:#f3f4f6; --wa:#25d366; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#e5e7eb; color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  h1 { font-size:20px; margin:20px 20px 4px; }
+  .lead { margin:0 20px 16px; color:#374151; font-size:14px; max-width:1100px; }
+  .row { display:flex; flex-wrap:wrap; gap:24px; padding:0 20px 30px; align-items:flex-start; }
+  .label { font-weight:800; font-size:15px; margin-bottom:8px; }
+  .phone { width:375px; height:780px; background:#f9fafb; border-radius:28px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.18); position:relative; }
+  .cap { width:375px; font-size:13px; color:#374151; margin-top:8px; line-height:1.45; }
+  .cap b { color:var(--ink); }
+  .dim { position:absolute; inset:0; background:rgba(0,0,0,.45); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:18px 18px 0 0; }
+  .sh-head { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid var(--line); }
+  .sh-head b { font-size:17px; }
+  .line { display:flex; align-items:center; gap:10px; padding:9px 18px; border-bottom:1px solid var(--soft); }
+  .line .info { flex:1; }
+  .line .nm { font-weight:700; font-size:15px; }
+  .line .pr { font-size:12px; color:var(--muted); }
+  .tags { display:flex; gap:4px; margin-top:3px; flex-wrap:wrap; }
+  .tag { font-size:11px; font-weight:700; padding:1px 7px; border-radius:999px; }
+  .hot { background:#ffedd5; color:#9a3412; } .iced { background:#e0f2fe; color:#075985; } .flair { background:#ede9fe; color:#5b21b6; } .hz { background:#fce7f3; color:#9d174d; }
+  .q { font-weight:800; width:18px; text-align:center; }
+  .qb { width:30px; height:30px; border-radius:50%; border:1.5px solid #d1d5db; display:grid; place-items:center; font-size:16px; }
+  .foot { padding:12px 18px 18px; }
+  .sec { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin:0 0 6px; }
+  .inp { border:1.5px solid #d1d5db; border-radius:10px; padding:9px 12px; font-size:15px; color:var(--ink); background:#fff; }
+  .inp.ph { color:#6b7280; }
+  .two { display:grid; grid-template-columns:1.2fr 1fr; gap:8px; }
+  .known { margin-top:8px; background:#eff6ff; border:1.5px solid #bfdbfe; border-radius:12px; padding:8px 10px; font-size:13px; color:#1e3a8a; }
+  .known b { color:#1e3a8a; }
+  .chk { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; margin-top:8px; color:var(--ink2); }
+  .box { width:18px; height:18px; border-radius:5px; border:2px solid #d1d5db; flex-shrink:0; display:grid; place-items:center; font-size:11px; color:#fff; font-weight:900; }
+  .box.on { background:#16a34a; border-color:#16a34a; }
+  .total { display:flex; justify-content:space-between; align-items:center; margin:12px 0 8px; }
+  .total b { font-size:24px; font-weight:900; }
+  .pay { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .pay div { height:50px; border-radius:12px; display:grid; place-items:center; font-weight:800; font-size:16px; }
+  .ctype { display:inline-block; font-size:11px; font-weight:800; padding:2px 8px; border-radius:999px; }
+  .rep { background:#f3e8ff; color:#6b21a8; } .reg { background:#fef3c7; color:#92400e; } .newc { background:#dbeafe; color:#1e40af; }
+  .top { background:#111827; color:#fff; padding:14px 16px; font-weight:800; letter-spacing:2px; font-size:14px; }
+  .tiles { padding:14px 16px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .tile { aspect-ratio:1; border-radius:12px; background:#5b3a29; }
+
+  /* success */
+  .ok { text-align:center; padding:22px 20px 24px; }
+  .ok .tick { width:56px; height:56px; border-radius:50%; background:#dcfce7; color:#16a34a; display:grid; place-items:center; font-size:30px; margin:0 auto 8px; font-weight:900; }
+  .ok h3 { margin:0; font-size:20px; }
+  .ok p { margin:4px 0 16px; color:var(--muted); font-size:14px; }
+  .wa { height:54px; border-radius:12px; background:var(--wa); color:#fff; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:800; font-size:16px; }
+  .ghost { margin-top:10px; height:46px; border-radius:12px; border:2px solid #e5e7eb; display:grid; place-items:center; font-weight:700; color:var(--ink2); }
+
+  /* whatsapp */
+  .wa-top { background:#075e54; color:#fff; padding:14px 16px; display:flex; align-items:center; gap:10px; }
+  .av { width:36px; height:36px; border-radius:50%; background:#cbd5e1; display:grid; place-items:center; color:#334155; font-weight:800; }
+  .chat { background:#ece5dd; position:absolute; top:64px; bottom:60px; left:0; right:0; padding:14px; }
+  .bubble { background:#dcf8c6; border-radius:10px 0 10px 10px; padding:8px 10px; margin-left:auto; max-width:300px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11.5px; line-height:1.45; white-space:pre; color:#111; box-shadow:0 1px 1px rgba(0,0,0,.1); }
+  .bubble .meta { font-family:system-ui; font-size:10px; color:#6b7280; text-align:right; margin-top:2px; white-space:normal; }
+  .wa-in { position:absolute; bottom:0; left:0; right:0; height:60px; background:#f0f0f0; display:flex; align-items:center; gap:8px; padding:0 10px; }
+  .wa-in div { flex:1; background:#fff; border-radius:20px; height:40px; }
+  .wa-in span { width:44px; height:44px; border-radius:50%; background:#00a884; color:#fff; display:grid; place-items:center; font-size:18px; }
+
+  /* orders */
+  .card { margin:12px 16px; border-radius:14px; border:2px solid #86efac; background:#f0fdf4; padding:14px; }
+  .c-head { display:flex; justify-content:space-between; }
+  .c-head b { font-size:20px; }
+  .cust { display:flex; align-items:center; gap:6px; margin:6px 0 8px; font-size:14px; font-weight:700; }
+  .item { display:flex; justify-content:space-between; margin:6px 0; font-size:15px; font-weight:600; }
+  .div { border-top:1px solid #d1d5db; margin:10px 0 8px; }
+  .meta { display:flex; gap:6px; margin-bottom:8px; }
+  .pm { border:1.5px solid #9ca3af; border-radius:999px; padding:2px 9px; font-size:12px; font-weight:800; }
+  .bottom { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .bottom b { font-size:24px; font-weight:900; }
+  .btn-wa { border:2px solid #25d366; color:#047857; border-radius:10px; padding:8px 10px; font-weight:800; font-size:13px; }
+  .btn-done { background:#16a34a; color:#fff; border-radius:10px; padding:9px 14px; font-weight:800; }
+
+  /* customers */
+  .head { padding:16px 16px 6px; }
+  .head h2 { margin:0 0 10px; font-size:22px; }
+  .search { margin:0 16px 10px; border:1.5px solid #d1d5db; border-radius:12px; padding:10px 12px; color:#6b7280; background:#fff; font-size:14px; }
+  .chips { display:flex; gap:6px; margin:0 16px 10px; overflow:hidden; }
+  .chip { flex-shrink:0; border:1.5px solid #d1d5db; border-radius:999px; padding:5px 11px; font-size:12.5px; font-weight:700; background:#fff; white-space:nowrap; }
+  .chip.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .stat { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 16px 10px; }
+  .stat div { background:#fff; border:1px solid var(--line); border-radius:12px; padding:8px 10px; }
+  .stat b { display:block; font-size:20px; font-weight:900; }
+  .stat small { font-size:11.5px; color:var(--muted); font-weight:700; }
+  .cu { display:flex; align-items:center; gap:10px; margin:0 16px; padding:10px 0; border-bottom:1px solid var(--soft); }
+  .cu .av { background:#e0e7ff; color:#3730a3; }
+  .cu .info { flex:1; min-width:0; }
+  .cu .nm { font-weight:700; font-size:15px; }
+  .cu .sub { font-size:12px; color:var(--muted); margin-top:2px; }
+  .cu .amt { text-align:right; font-weight:800; }
+  .cu .amt small { display:block; font-size:11px; color:var(--muted); font-weight:600; }
+  .consent { font-size:10px; font-weight:800; color:#047857; background:#d1fae5; border-radius:999px; padding:1px 6px; }
+  nav { position:absolute; bottom:0; left:0; right:0; height:64px; background:#fff; border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(5,1fr); }
+  nav span { display:grid; place-items:center; font-size:12px; font-weight:600; color:#6b7280; }
+  nav span.on { color:var(--ink); font-weight:800; }
+  .kp { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0 16px 12px; }
+  .kp div { background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; }
+  .kp small { font-size:12px; color:var(--muted); font-weight:700; display:block; }
+  .kp b { font-size:20px; font-weight:900; }
+  .hist div { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--soft); font-size:13.5px; }
+  .hist small { color:var(--muted); }
+</style>
+</head>
+<body>
+<h1>Billing &amp; customers mockups</h1>
+<p class="lead">Phone and name are <b>optional</b> at checkout; leave them empty and nothing changes. With a number, the app recognises returning customers, sets New / Repeat / Regular by itself, and opens WhatsApp with the cash memo ready to send. All numbers and names are examples.</p>
+
+<div class="row">
+  <!-- A -->
+  <div>
+    <div class="label">A · Review &amp; pay with customer</div>
+    <div class="phone">
+      <div class="top">BLACK SHEEP</div>
+      <div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="sh-head"><b>Review &amp; pay · 4 items</b><span style="font-size:22px">×</span></div>
+        <div class="line"><div class="info"><div class="nm">Latte</div><div class="tags"><span class="tag iced">Iced</span><span class="tag flair">Flair 58</span><span class="tag hz">Hazelnut</span></div><div class="pr">₹190 each</div></div><span class="qb">−</span><span class="q">1</span><span class="qb">+</span></div>
+        <div class="line"><div class="info"><div class="nm">Masala Chai</div><div class="tags"><span class="tag hot">Hot</span></div><div class="pr">₹80 each</div></div><span class="qb">−</span><span class="q">2</span><span class="qb">+</span></div>
+        <div class="line"><div class="info"><div class="nm">Croissant</div><div class="pr">₹150 each</div></div><span class="qb">−</span><span class="q">1</span><span class="qb">+</span></div>
+        <div class="foot">
+          <p class="sec">Customer (optional)</p>
+          <div class="two"><div class="inp">98765 43210</div><div class="inp">Rahul</div></div>
+          <div class="known">👋 <b>Rahul</b> · 6th visit · usually <b>Iced Latte</b> · <span class="ctype reg">Regular</span></div>
+          <div class="chk"><span class="box on">✓</span>Send cash memo on WhatsApp</div>
+          <div class="chk"><span class="box on">✓</span>OK to send offers &amp; updates <span style="color:#6b7280;font-weight:500">(ask first)</span></div>
+          <div class="total"><span style="font-weight:700">Total</span><b>₹500</b></div>
+          <div class="pay"><div style="background:#111827;color:#fff">UPI</div><div style="border:2px solid #111827">Cash</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cap">Type the number on the keypad; after 10 digits the app finds them and fills the name. <b>New / Repeat / Regular is set automatically</b> (1st visit / 2–4 / 5+), so that row is gone. The offers tick is only ticked if the customer says yes, and it's remembered.</div>
+  </div>
+
+  <!-- B -->
+  <div>
+    <div class="label">B · After payment</div>
+    <div class="phone">
+      <div class="top">BLACK SHEEP</div>
+      <div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="ok">
+          <div class="tick">✓</div>
+          <h3>Order #142 · ₹500</h3>
+          <p>Paid by UPI · Rahul</p>
+          <div class="wa">💬 Send memo on WhatsApp</div>
+          <div class="ghost">Done</div>
+        </div>
+      </div>
+    </div>
+    <div class="cap">Only shown when a number was entered and "Send cash memo" is ticked. One tap opens WhatsApp with the memo already typed for Rahul's number; you just press send. Without a number, the order completes exactly like today.</div>
+  </div>
+
+  <!-- C -->
+  <div>
+    <div class="label">C · What the customer gets</div>
+    <div class="phone">
+      <div class="wa-top"><span style="font-size:20px">←</span><span class="av">R</span><div><b>Rahul</b><div style="font-size:12px;opacity:.8">+91 98765 43210</div></div></div>
+      <div class="chat">
+<div class="bubble">*BLACK SHEEP* ☕
+Cafe on Wheels
+
+*CASH MEMO*  No. 000142
+21 Nov 2026, 03:42 pm
+Customer: Rahul
+------------------------------
+1 × Latte (Iced)        ₹190
+    Flair 58 · Hazelnut
+2 × Masala Chai (Hot)   ₹160
+1 × Croissant           ₹150
+------------------------------
+*TOTAL                  ₹500*
+Paid by UPI
+------------------------------
+Thank you, see you soon! 🐑<div class="meta">3:42 pm ✓✓</div></div>
+      </div>
+      <div class="wa-in"><div></div><span>➤</span></div>
+    </div>
+    <div class="cap">Sent as a WhatsApp text from the counter phone, so it's free and needs no setup. Memo numbers go up in order. Address, phone or Instagram can be added to the header later from Admin → Settings.</div>
+  </div>
+
+  <!-- D -->
+  <div>
+    <div class="label">D · Orders card</div>
+    <div class="phone">
+      <div class="card">
+        <div class="c-head"><b>#142</b><div style="text-align:right;font-size:12px;font-weight:600;color:#374151">03:42 pm<br>21 Nov</div></div>
+        <div class="cust">👤 Rahul <span style="color:#4b5563;font-weight:600">98xxxx3210</span><span class="ctype reg">Regular</span></div>
+        <div class="item"><div>1× Latte<div class="tags"><span class="tag iced">Iced</span><span class="tag flair">Flair 58</span><span class="tag hz">Hazelnut</span></div></div><span>₹190</span></div>
+        <div class="item"><div>2× Masala Chai<div class="tags"><span class="tag hot">Hot</span></div></div><span>₹160</span></div>
+        <div class="item"><span>1× Croissant</span><span>₹150</span></div>
+        <div class="div"></div>
+        <div class="meta"><span class="pm">UPI</span><span style="font-size:12px;font-weight:700;color:#047857">✓ memo sent</span></div>
+        <div class="bottom"><b>₹500</b><span class="btn-wa">💬 Memo</span><span class="btn-done">✓ Done</span></div>
+      </div>
+      <div class="card" style="border-color:#fecaca;background:#fff">
+        <div class="c-head"><b>#143</b><div style="text-align:right;font-size:12px;font-weight:600;color:#374151">03:45 pm<br>21 Nov</div></div>
+        <div class="item"><span>1× Cappuccino</span><span>₹120</span></div>
+        <div class="div"></div>
+        <div class="meta"><span class="pm">CASH</span></div>
+        <div class="bottom"><b>₹120</b><span style="background:#fee2e2;color:#b91c1c;border:1.5px solid #fecaca;border-radius:10px;padding:9px 14px;font-weight:800">Preparing</span></div>
+      </div>
+      <nav><span>POS</span><span class="on">Orders</span><span>Stock</span><span>Sales</span><span>Admin</span></nav>
+    </div>
+    <div class="cap">Orders with a customer show their name, a <b>partly hidden</b> number and their type. <b>💬 Memo</b> resends the cash memo any time. Orders without a customer look exactly like today.</div>
+  </div>
+
+  <!-- E -->
+  <div>
+    <div class="label">E · Customers list</div>
+    <div class="phone">
+      <div class="head"><h2>Customers</h2></div>
+      <div class="search">🔍 Search name or number</div>
+      <div class="stat"><div><b>148</b><small>Customers</small></div><div><b>37</b><small>Regulars</small></div><div><b>112</b><small>OK for offers</small></div></div>
+      <div class="chips"><span class="chip on">All</span><span class="chip">Regulars</span><span class="chip">New this week</span><span class="chip">Not seen 30 days</span><span class="chip">Top spenders</span></div>
+      <div class="cu"><span class="av">R</span><div class="info"><div class="nm">Rahul <span class="ctype reg">Regular</span></div><div class="sub">6 visits · Iced Latte · today <span class="consent">offers ✓</span></div></div><div class="amt">₹2,340<small>spent</small></div></div>
+      <div class="cu"><span class="av">P</span><div class="info"><div class="nm">Priya <span class="ctype rep">Repeat</span></div><div class="sub">3 visits · Cappuccino · 2 days ago <span class="consent">offers ✓</span></div></div><div class="amt">₹860<small>spent</small></div></div>
+      <div class="cu"><span class="av">#</span><div class="info"><div class="nm">98xxxx1123 <span class="ctype newc">New</span></div><div class="sub">1 visit · Masala Chai · yesterday</div></div><div class="amt">₹160<small>spent</small></div></div>
+      <div class="cu"><span class="av">A</span><div class="info"><div class="nm">Arjun <span class="ctype reg">Regular</span></div><div class="sub">9 visits · Mocha · 34 days ago <span class="consent">offers ✓</span></div></div><div class="amt">₹3,120<small>spent</small></div></div>
+      <div style="margin:12px 16px;font-size:12px;color:#4b5563">⬇ Export CSV</div>
+      <nav><span>POS</span><span>Orders</span><span>Stock</span><span>Sales</span><span class="on">Admin</span></nav>
+    </div>
+    <div class="cap">In <b>Admin → Customers</b>. Built automatically from orders that had a number. Groups are ready for marketing later ("Not seen 30 days" = people to win back). Search finds anyone by name or last digits.</div>
+  </div>
+
+  <!-- F -->
+  <div>
+    <div class="label">F · Customer details</div>
+    <div class="phone">
+      <div class="head"><h2>Rahul <span class="ctype reg" style="font-size:13px;vertical-align:middle">Regular</span></h2><div style="font-size:14px;color:#374151;margin-top:-6px">+91 98765 43210</div></div>
+      <div class="kp"><div><small>Visits</small><b>6</b></div><div><small>Total spent</small><b>₹2,340</b></div><div><small>Usually orders</small><b style="font-size:16px">Iced Latte</b></div><div><small>Last visit</small><b style="font-size:16px">Today</b></div></div>
+      <div style="margin:0 16px 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="wa" style="height:46px;font-size:14px">💬 WhatsApp</div>
+        <div class="ghost" style="margin:0;height:46px">✎ Edit name</div>
+      </div>
+      <div style="margin:0 16px 10px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700">OK to send offers<span style="background:#16a34a;color:#fff;border-radius:999px;padding:3px 10px;font-size:12px">Yes · since 2 Nov</span></div>
+      <div style="margin:0 16px"><p class="sec">Recent orders</p>
+        <div class="hist"><div><span>Today · #142 · Latte, 2 Chai, Croissant</span><b>₹500</b></div><div><span>18 Nov · #128 · Latte</span><b>₹140</b></div><div><span>14 Nov · #101 · Latte, Brownie</span><b>₹260</b></div><div><span>9 Nov · #77 · Latte</span><b>₹140</b></div></div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span>Stock</span><span>Sales</span><span class="on">Admin</span></nav>
+    </div>
+    <div class="cap">Everything about one customer. Turn "OK to send offers" off if they ask to stop. Delete removes their number and name from the app (orders stay, without the number).</div>
+  </div>
+</div>
+</body>
+</html>

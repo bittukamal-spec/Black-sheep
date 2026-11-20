@@ -20,3 +20,6 @@
 
 ## Inventory
 - `inventory.html` / `inventory.png`: Stock tab: board, item actions, waste, shopping list, wastage report, recipes, stock-in via Expenses, setup.
+
+## Billing & customers
+- `billing.html` / `billing.png`: optional phone/name at checkout, WhatsApp cash memo, orders card, Customers list and details.
