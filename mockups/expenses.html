@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expenses Mockups</title>
+<style>
+  :root { --ink:#111827; --ink2:#1f2937; --muted:#4b5563; --line:#e5e7eb; --soft:#f3f4f6; --up:#15803d; --down:#b91c1c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#e5e7eb; color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  h1 { font-size:20px; margin:20px 20px 4px; }
+  .lead { margin:0 20px 16px; color:#374151; font-size:14px; }
+  .row { display:flex; flex-wrap:wrap; gap:24px; padding:0 20px 30px; align-items:flex-start; }
+  .label { font-weight:800; font-size:15px; margin-bottom:8px; }
+  .phone { width:375px; height:780px; background:#f9fafb; border-radius:28px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.18); position:relative; }
+  .cap { width:375px; font-size:13px; color:#374151; margin-top:8px; line-height:1.45; }
+  .cap b { color:var(--ink); }
+  .scroll { position:absolute; inset:0 0 64px 0; overflow:hidden; }
+  nav { position:absolute; bottom:0; left:0; right:0; height:64px; background:#fff; border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(4,1fr); }
+  nav span { display:grid; place-items:center; font-size:12px; font-weight:600; color:#6b7280; }
+  nav span.on { color:var(--ink); }
+  .head { padding:16px 16px 8px; }
+  .head h2 { margin:0 0 10px; font-size:22px; }
+  .tabs { display:flex; gap:6px; overflow:hidden; }
+  .tabs span { flex-shrink:0; padding:7px 12px; border-radius:999px; border:1px solid var(--line); background:#fff; font-size:13px; font-weight:700; color:var(--muted); }
+  .tabs span.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .seg { display:flex; margin:10px 16px; background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:4px; }
+  .seg span { flex:1; text-align:center; padding:7px 0; border-radius:9px; font-size:13px; font-weight:700; color:var(--muted); }
+  .seg span.on { background:#fff; color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.08); }
+  .month { display:flex; justify-content:space-between; align-items:center; margin:4px 16px 10px; font-weight:800; font-size:16px; }
+  .month .arr { width:32px; height:32px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; color:var(--ink); background:#fff; }
+  .card { margin:0 16px 12px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; }
+  .big { font-size:28px; font-weight:900; }
+  .small { font-size:12px; color:var(--muted); font-weight:600; }
+  .split { display:flex; height:12px; border-radius:6px; overflow:hidden; margin:10px 0 6px; }
+  .legend { display:flex; flex-wrap:wrap; gap:4px 12px; font-size:12px; color:var(--ink2); }
+  .legend i { display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:4px; }
+  .day { margin:12px 16px 4px; font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+  .exp { display:flex; align-items:center; gap:10px; margin:0 16px; padding:10px 0; border-bottom:1px solid var(--soft); }
+  .ico { width:38px; height:38px; border-radius:10px; display:grid; place-items:center; font-size:18px; flex-shrink:0; }
+  .exp .info { flex:1; min-width:0; }
+  .exp .t { font-weight:700; font-size:15px; }
+  .exp .s { font-size:12px; color:var(--muted); margin-top:2px; display:flex; gap:4px; flex-wrap:wrap; }
+  .tag { font-size:11px; font-weight:700; padding:1px 7px; border-radius:999px; }
+  .p1 { background:#dbeafe; color:#1e40af; } .p2 { background:#fce7f3; color:#9d174d; } .till { background:#fef3c7; color:#92400e; }
+  .m { background:var(--soft); color:var(--ink2); }
+  .amt { font-weight:800; font-size:15px; }
+  .fab { position:absolute; right:16px; bottom:80px; background:var(--ink); color:#fff; border-radius:999px; padding:14px 20px; font-weight:800; font-size:15px; box-shadow:0 6px 16px rgba(0,0,0,.25); }
+  .rep { font-size:10px; font-weight:800; color:#6d28d9; background:#ede9fe; border-radius:999px; padding:1px 6px; }
+
+  /* add sheet */
+  .dim { position:absolute; inset:0; background:rgba(0,0,0,.45); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:18px 18px 0 0; padding:14px 18px 18px; }
+  .sh-top { display:flex; justify-content:space-between; align-items:center; }
+  .sh-top b { font-size:17px; }
+  .amount { text-align:center; font-size:40px; font-weight:900; margin:6px 0 2px; }
+  .amount small { font-size:13px; color:var(--muted); display:block; font-weight:600; }
+  .sec { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin:12px 0 6px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { border:1.5px solid #d1d5db; border-radius:999px; padding:6px 11px; font-size:13px; font-weight:700; color:var(--ink2); background:#fff; }
+  .chip.on { border-color:var(--ink); background:var(--ink); color:#fff; }
+  .inp { border:1.5px solid #d1d5db; border-radius:10px; padding:9px 12px; font-size:14px; color:#6b7280; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:12px; }
+  .keypad span { background:var(--soft); border-radius:10px; text-align:center; padding:9px 0; font-size:18px; font-weight:700; }
+  .save { margin-top:12px; height:52px; border-radius:12px; background:var(--ink); color:#fff; display:flex; justify-content:center; align-items:center; font-weight:800; font-size:16px; }
+  .chk { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; margin-top:10px; color:var(--ink2); }
+  .box { width:18px; height:18px; border-radius:5px; border:2px solid #d1d5db; }
+
+  /* partners */
+  .pcard { margin:0 16px 12px; border-radius:16px; padding:14px; color:#fff; }
+  .pcard .nm { font-weight:800; font-size:16px; display:flex; justify-content:space-between; }
+  .pcard .grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+  .pcard .grid div { background:rgba(255,255,255,.14); border-radius:10px; padding:8px 10px; }
+  .pcard .grid small { display:block; font-size:11px; opacity:.85; font-weight:600; }
+  .pcard .grid b { font-size:18px; }
+  .btnrow { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0 16px 12px; }
+  .btnrow span { border:2px solid var(--ink); border-radius:12px; text-align:center; padding:11px 0; font-weight:800; font-size:14px; background:#fff; }
+  .hist { margin:0 16px; }
+  .hist div { display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--soft); font-size:14px; }
+  .hist small { color:var(--muted); }
+
+  /* P&L */
+  .pl div.r { display:flex; justify-content:space-between; padding:8px 0; font-size:15px; border-bottom:1px solid var(--soft); }
+  .pl .net { font-size:18px; font-weight:900; border-bottom:0 !important; padding-top:10px !important; }
+  .hb { display:grid; grid-template-columns:110px 1fr 58px; gap:8px; align-items:center; font-size:13px; margin:6px 0; }
+  .hb .tr { height:11px; border-radius:6px; background:var(--soft); overflow:hidden; }
+  .hb .f { height:100%; border-radius:6px; }
+  .hb .v { text-align:right; font-weight:800; }
+  .bars { display:flex; align-items:flex-end; gap:10px; height:110px; margin-top:8px; }
+  .bars .col { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:11px; color:var(--muted); font-weight:600; }
+  .bars .pair { display:flex; gap:3px; align-items:flex-end; height:90px; }
+  .bars .pair i { width:12px; border-radius:3px 3px 0 0; display:block; }
+  .delta { font-size:12px; font-weight:800; }
+</style>
+</head>
+<body>
+<h1>Expenses &amp; profit mockups</h1>
+<p class="lead">A new <b>Expenses</b> tab in Admin. Four screens: expense list, quick add, partners, profit &amp; loss. All numbers are examples.</p>
+
+<div class="row">
+  <!-- A: list -->
+  <div>
+    <div class="label">A · Expenses list</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Admin</h2>
+          <div class="tabs"><span>Menu</span><span>Flavours</span><span class="on">Expenses</span><span>Settings</span></div></div>
+        <div class="seg"><span class="on">Expenses</span><span>Partners</span><span>Profit</span></div>
+        <div class="month"><span class="arr">‹</span>November 2026<span class="arr">›</span></div>
+        <div class="card">
+          <div class="small">Spent this month</div>
+          <div class="big">₹38,450</div>
+          <div class="split"><div style="width:39%;background:#2563eb"></div><div style="width:52%;background:#db2777"></div><div style="width:9%;background:#d97706"></div></div>
+          <div class="legend"><span><i style="background:#2563eb"></i>Prabhanshu <b>₹15,000</b></span><span><i style="background:#db2777"></i>Partner 2 <b>₹20,050</b></span><span><i style="background:#d97706"></i>Till cash <b>₹3,400</b></span></div>
+        </div>
+        <div class="day">Today · 20 Nov</div>
+        <div class="exp"><div class="ico" style="background:#e0f2fe">🥛</div><div class="info"><div class="t">Milk 20 L</div><div class="s"><span class="tag m">Milk &amp; dairy</span><span class="tag p1">Prabhanshu</span><span>UPI · Amul dairy</span></div></div><div class="amt">₹1,320</div></div>
+        <div class="exp"><div class="ico" style="background:#fef3c7">🥤</div><div class="info"><div class="t">Cups 500 pcs</div><div class="s"><span class="tag m">Cups &amp; packaging</span><span class="tag till">Till cash</span></div></div><div class="amt">₹950</div></div>
+        <div class="day">18 Nov</div>
+        <div class="exp"><div class="ico" style="background:#efe4dc">☕</div><div class="info"><div class="t">Coffee beans 2 kg</div><div class="s"><span class="tag m">Coffee beans</span><span class="tag p2">Partner 2</span><span>UPI</span></div></div><div class="amt">₹3,600</div></div>
+        <div class="day">1 Nov</div>
+        <div class="exp"><div class="ico" style="background:#ede9fe">🏠</div><div class="info"><div class="t">Rent <span class="rep">monthly</span></div><div class="s"><span class="tag m">Rent</span><span class="tag p2">Partner 2</span><span>UPI</span></div></div><div class="amt">₹15,000</div></div>
+      </div>
+      <div class="fab">+ Add expense</div>
+      <nav><span>POS</span><span>Orders</span><span>Sales</span><span class="on">Admin</span></nav>
+    </div>
+    <div class="cap">Month total at the top, split by <b>who paid</b>. Entries grouped by day, each tagged with category and payer. Tap one to edit or delete. Filter by category or partner from the month header.</div>
+  </div>
+
+  <!-- B: add -->
+  <div>
+    <div class="label">B · Add expense (about 5 taps)</div>
+    <div class="phone">
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="sh-top"><b>Add expense</b><span style="font-size:22px">×</span></div>
+        <div class="amount">₹1,320<small>Today, 20 Nov · tap to change date</small></div>
+        <div class="sec">Category</div>
+        <div class="chips"><span class="chip on">🥛 Milk &amp; dairy</span><span class="chip">☕ Beans</span><span class="chip">🍯 Syrups</span><span class="chip">🥤 Cups</span><span class="chip">🍪 Snacks</span><span class="chip">🏠 Rent</span><span class="chip">⚡ Bills</span><span class="chip">🔧 Repairs</span><span class="chip">＋ More</span></div>
+        <div class="sec">Paid by</div>
+        <div class="chips"><span class="chip on">Prabhanshu</span><span class="chip">Partner 2</span><span class="chip">Till cash</span></div>
+        <div class="sec">How</div>
+        <div class="chips"><span class="chip on">UPI</span><span class="chip">Cash</span><span class="chip">Card</span></div>
+        <div class="sec">Details (optional)</div>
+        <div class="two"><div class="inp">Milk 20 L</div><div class="inp">Amul dairy</div></div>
+        <div class="chk"><span class="box"></span>Repeats every month</div>
+        <div class="keypad"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>00</span><span>0</span><span>⌫</span></div>
+        <div class="save">Save expense</div>
+      </div>
+    </div>
+    <div class="cap">Type the amount on the keypad, tap a category, tap who paid. <b>Paid by</b> and <b>How</b> remember your last choice. The last vendor for that category fills in automatically. "Repeats every month" adds it again on the same date each month (rent, salaries, bills).</div>
+  </div>
+
+  <!-- C: partners -->
+  <div>
+    <div class="label">C · Partners</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Admin</h2>
+          <div class="tabs"><span>Menu</span><span>Flavours</span><span class="on">Expenses</span><span>Settings</span></div></div>
+        <div class="seg"><span>Expenses</span><span class="on">Partners</span><span>Profit</span></div>
+        <div class="month"><span class="arr">‹</span>November 2026<span class="arr">›</span></div>
+        <div class="pcard" style="background:#1e40af">
+          <div class="nm"><span>Prabhanshu</span><span style="font-size:12px;opacity:.85">Partner</span></div>
+          <div class="grid"><div><small>Paid this month</small><b>₹15,000</b></div><div><small>Total invested</small><b>₹2,40,000</b></div></div>
+        </div>
+        <div class="pcard" style="background:#9d174d">
+          <div class="nm"><span>Partner 2</span><span style="font-size:12px;opacity:.85">CEO</span></div>
+          <div class="grid"><div><small>Paid this month</small><b>₹20,050</b></div><div><small>Total invested</small><b>₹3,10,000</b></div></div>
+        </div>
+        <div class="btnrow"><span>+ Money put in</span><span>− Money taken out</span></div>
+        <div class="day">Investment history</div>
+        <div class="hist">
+          <div><span>Partner 2 · Coffee machine</span><b>+₹85,000</b></div>
+          <div><span>Prabhanshu · Grinder + setup</span><b>+₹60,000</b></div>
+          <div><span>Partner 2 · Deposit for shop</span><b>+₹45,000</b></div>
+          <div><span>Prabhanshu · Withdrawal</span><b style="color:#b91c1c">−₹10,000</b></div>
+          <div><small>Total invested in Black Sheep</small><b>₹5,50,000</b></div>
+        </div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span>Sales</span><span class="on">Admin</span></nav>
+    </div>
+    <div class="cap">No splitting or settling up. Just a clear record of what each of you paid this month and in total. <b>Money put in</b> is for one-off investments like equipment or a deposit; <b>Money taken out</b> is for when either of you takes money out of the business. Names and roles are editable.</div>
+  </div>
+
+  <!-- D: profit -->
+  <div>
+    <div class="label">D · Profit &amp; loss</div>
+    <div class="phone">
+      <div class="scroll">
+        <div class="head"><h2>Admin</h2>
+          <div class="tabs"><span>Menu</span><span>Flavours</span><span class="on">Expenses</span><span>Settings</span></div></div>
+        <div class="seg"><span>Expenses</span><span>Partners</span><span class="on">Profit</span></div>
+        <div class="month"><span class="arr">‹</span>November 2026<span class="arr">›</span></div>
+        <div class="card pl">
+          <div class="r"><span>Sales</span><b>₹1,42,300</b></div>
+          <div class="r"><span>Expenses</span><b style="color:#b91c1c">−₹38,450</b></div>
+          <div class="r net"><span>Net profit</span><span style="color:#15803d">₹1,03,850</span></div>
+          <div class="delta" style="color:#15803d">▲ 12% vs October</div>
+        </div>
+        <div class="card">
+          <div class="small" style="margin-bottom:6px">Where the money went</div>
+          <div class="hb"><span>Rent</span><div class="tr"><div class="f" style="width:100%;background:#7c3aed"></div></div><span class="v">₹15,000</span></div>
+          <div class="hb"><span>Milk &amp; dairy</span><div class="tr"><div class="f" style="width:52%;background:#0284c7"></div></div><span class="v">₹7,800</span></div>
+          <div class="hb"><span>Coffee beans</span><div class="tr"><div class="f" style="width:48%;background:#5b3a29"></div></div><span class="v">₹7,200</span></div>
+          <div class="hb"><span>Cups</span><div class="tr"><div class="f" style="width:19%;background:#d97706"></div></div><span class="v">₹2,850</span></div>
+          <div class="hb"><span>Bills</span><div class="tr"><div class="f" style="width:24%;background:#15803d"></div></div><span class="v">₹3,600</span></div>
+          <div class="hb"><span>Other</span><div class="tr"><div class="f" style="width:13%;background:#6b7280"></div></div><span class="v">₹2,000</span></div>
+        </div>
+        <div class="card">
+          <div class="small">Last 4 months</div>
+          <div class="bars">
+            <div class="col"><div class="pair"><i style="height:55px;background:#111827"></i><i style="height:22px;background:#b91c1c"></i></div>Aug</div>
+            <div class="col"><div class="pair"><i style="height:62px;background:#111827"></i><i style="height:24px;background:#b91c1c"></i></div>Sep</div>
+            <div class="col"><div class="pair"><i style="height:74px;background:#111827"></i><i style="height:25px;background:#b91c1c"></i></div>Oct</div>
+            <div class="col"><div class="pair"><i style="height:86px;background:#111827"></i><i style="height:23px;background:#b91c1c"></i></div>Nov</div>
+          </div>
+          <div class="legend" style="margin-top:6px"><span><i style="background:#111827"></i>Sales</span><span><i style="background:#b91c1c"></i>Expenses</span><span style="margin-left:auto;font-weight:700">Download CSV</span></div>
+        </div>
+      </div>
+      <nav><span>POS</span><span>Orders</span><span>Sales</span><span class="on">Admin</span></nav>
+    </div>
+    <div class="cap">Sales (completed orders) minus expenses = <b>net profit</b> for the month, compared with last month. Bar list shows the biggest costs. <b>Download CSV</b> gives the month's expenses for your accountant.</div>
+  </div>
+</div>
+</body>
+</html>

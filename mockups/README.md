@@ -14,3 +14,6 @@
 
 ## POS v3
 - `pos-v3.html` / `pos-v3.png`: darker text, popup for items with no options, new Orders cards with colour-coded option tags.
+
+## Expenses & profit
+- `expenses.html` / `expenses.png`: Admin → Expenses: list, quick add, partners, profit & loss.
