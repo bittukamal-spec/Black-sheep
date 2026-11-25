@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expense Bill Mockup</title>
+<style>
+:root{--ink:#111827;--muted:#4b5563;--line:#e5e7eb;--soft:#f3f4f6;--bittu:#1e40af;}
+*{box-sizing:border-box}body{margin:0;background:#e5e7eb;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1{font-size:20px;margin:20px 20px 4px}.lead{margin:0 20px 16px;color:#374151;font-size:14px;max-width:1150px}
+.row{display:flex;flex-wrap:wrap;gap:24px;padding:0 20px 30px;align-items:flex-start}
+.phone{width:375px;height:800px;background:#f9fafb;border-radius:28px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18);position:relative}
+.label{font-weight:800;font-size:15px;margin-bottom:8px}.cap{width:375px;font-size:13px;color:#374151;margin-top:8px;line-height:1.45}.cap b{color:var(--ink)}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.sheet{position:absolute;left:0;right:0;bottom:0;top:46px;background:#fff;border-radius:22px 22px 0 0;padding:16px 18px 90px;overflow:hidden}
+.sheet h2{margin:0 0 12px;font-size:21px;display:flex;justify-content:space-between}
+.seg{display:flex;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:12px}
+.seg span{flex:1;text-align:center;padding:8px 0;border-radius:9px;font-size:14px;font-weight:800;color:var(--muted)}
+.seg span.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.lbl{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 6px}
+.in{border:1.5px solid #d1d5db;border-radius:10px;padding:9px 11px;font-size:15px;background:#fff}
+.in.ph{color:#9ca3af}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1.5px solid #d1d5db;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:800}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}.chip.bt{background:var(--bittu);border-color:var(--bittu);color:#fff}
+.item{border:1.5px solid var(--line);border-radius:14px;padding:10px;margin-bottom:8px}
+.item .top{display:grid;grid-template-columns:1fr 74px 84px;gap:6px}
+.item .cat{margin-top:7px;display:flex;gap:6px;align-items:center;font-size:12.5px}
+.pill{border-radius:999px;padding:3px 9px;font-weight:800;font-size:12px}
+.add{border:1.5px dashed #9ca3af;border-radius:12px;text-align:center;padding:10px;font-weight:800;color:#374151;font-size:14px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin:12px 2px 0;font-weight:900}
+.tot b{font-size:26px}
+.save{position:absolute;left:18px;right:18px;bottom:18px;background:var(--ink);color:#fff;border-radius:14px;padding:15px;text-align:center;font-weight:900;font-size:17px}
+.page{padding:14px 16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.day{margin:12px 0 4px;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.exp{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--soft)}
+.ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.t{font-weight:800;font-size:15px}.s{font-size:12px;color:var(--muted);margin-top:3px;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.tag{font-size:11.5px;font-weight:800;border-radius:999px;padding:2px 8px}
+.amt{margin-left:auto;font-weight:900;font-size:16px}
+.sub{margin:2px 0 6px 50px;border-left:3px solid var(--line);padding-left:10px}
+.sub div{display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0}
+.sub small{color:var(--muted)}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;margin:10px 0 8px}
+.leg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px}.leg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px}
+.stock{font-size:11.5px;color:#047857;font-weight:800}
+</style></head><body>
+<h1>Expenses: one bill, several items</h1>
+<p class="lead">For a shop trip where you buy many things together (e.g. D-Mart: milk, cups, syrup). Shop, date, who paid and how are filled once; each item has its own name, quantity, price and category. The total adds itself up. In reports each item counts under its own category, so "Milk & dairy" and "Cups" stay correct.</p>
+<div class="row">
+
+<div><div class="label">1 · Add expense → "Several items"</div>
+<div class="phone"><div class="dim"></div><div class="sheet">
+<h2>Add expense <span style="color:#6b7280">✕</span></h2>
+<div class="seg"><span>One item</span><span class="on">🧾 Several items (bill)</span></div>
+<div class="lbl">Shop</div><div class="in">D-Mart, Vijay Nagar</div>
+<div class="lbl">Items</div>
+<div class="item"><div class="top"><div class="in">Amul milk</div><div class="in">6 L</div><div class="in">₹384</div></div>
+<div class="cat"><span class="pill" style="background:#e0f2fe;color:#0369a1">🥛 Milk &amp; dairy</span><span class="stock">✓ +6 L to stock</span></div></div>
+<div class="item"><div class="top"><div class="in">Paper cups 250ml</div><div class="in">200</div><div class="in">₹460</div></div>
+<div class="cat"><span class="pill" style="background:#fef3c7;color:#b45309">🥤 Cups &amp; packaging</span></div></div>
+<div class="item"><div class="top"><div class="in">Hazelnut syrup</div><div class="in">1 btl</div><div class="in">₹650</div></div>
+<div class="cat"><span class="pill" style="background:#ffedd5;color:#b45309">🍯 Syrups</span></div></div>
+<div class="item"><div class="top"><div class="in ph">Item</div><div class="in ph">Qty</div><div class="in ph">₹</div></div></div>
+<div class="add">+ Add item</div>
+<div class="tot"><span>Bill total · 3 items</span><b>₹1,494</b></div>
+<div class="save">Save bill · ₹1,494</div>
+</div></div>
+<div class="cap"><b>Tap the category pill</b> on an item to change it. New items take the last category used. Quantity is optional text (6 L, 200, 1 btl).</div></div>
+
+<div><div class="label">2 · Further down the same form</div>
+<div class="phone"><div class="dim"></div><div class="sheet" style="top:46px">
+<h2>Add expense <span style="color:#6b7280">✕</span></h2>
+<div class="tot" style="margin-top:0"><span>Bill total · 3 items</span><b>₹1,494</b></div>
+<div class="lbl">Paid by</div>
+<div class="chips"><span class="chip bt">Bittu · this phone</span><span class="chip">Till cash</span><span class="chip">Manna</span></div>
+<div class="lbl">How</div>
+<div class="chips"><span class="chip on">UPI</span><span class="chip">Cash</span><span class="chip">Card</span></div>
+<div class="lbl">Date</div><div class="in">Today, 25 Nov</div>
+<div class="lbl">Add to stock</div>
+<div style="font-size:13px;color:#374151">Each item can be linked to a stock item. Its own price becomes the stock cost, so recipe costs stay accurate.</div>
+<div class="item" style="margin-top:8px"><div style="display:flex;justify-content:space-between;font-size:14px"><b>Amul milk → Milk (L)</b><span>+6 L</span></div></div>
+<div class="save">Save bill · ₹1,494</div>
+</div></div>
+<div class="cap">Shop, who paid, how and date are entered <b>once</b> for the whole bill.</div></div>
+
+<div><div class="label">3 · Expenses list</div>
+<div class="phone"><div class="page">
+<div class="card"><div style="font-size:13px;color:#4b5563;font-weight:700">Spent this month</div><div style="font-size:28px;font-weight:900">₹22,364</div>
+<div class="bar"><span style="width:28%;background:#1e40af"></span><span style="width:67%;background:#9d174d"></span><span style="width:5%;background:#d97706"></span></div>
+<div class="leg"><span><i style="background:#1e40af"></i>Bittu ₹6,414</span><span><i style="background:#9d174d"></i>Manna ₹15,000</span><span><i style="background:#d97706"></i>Till ₹950</span></div></div>
+<div class="day">Today</div>
+<div class="exp"><div class="ico" style="background:#f3f4f6">🧾</div><div><div class="t">D-Mart, Vijay Nagar</div><div class="s"><span class="tag" style="background:#f3f4f6">3 items</span><span class="tag" style="background:#dbeafe;color:#1e40af">Bittu</span>UPI</div></div><div class="amt">₹1,494 ▾</div></div>
+<div class="sub"><div><span>🥛 Amul milk <small>· 6 L</small></span><b>₹384</b></div><div><span>🥤 Paper cups 250ml <small>· 200</small></span><b>₹460</b></div><div><span>🍯 Hazelnut syrup <small>· 1 btl</small></span><b>₹650</b></div><div style="color:#4b5563;font-size:12.5px"><span>Tap to edit the bill</span></div></div>
+<div class="exp"><div class="ico" style="background:#efe7e1">☕</div><div><div class="t">Coffee beans 2 kg</div><div class="s"><span class="tag" style="background:#f3f4f6">Coffee beans</span><span class="tag" style="background:#dbeafe;color:#1e40af">Bittu</span>UPI</div></div><div class="amt">₹3,600</div></div>
+<div class="day">Sun, 1 Nov</div>
+<div class="exp"><div class="ico" style="background:#ede9fe">🏠</div><div><div class="t">Rent</div><div class="s"><span class="tag" style="background:#f3f4f6">Rent</span><span class="tag" style="background:#fce7f3;color:#9d174d">Manna</span>UPI</div></div><div class="amt">₹15,000</div></div>
+</div></div>
+<div class="cap">A bill shows as <b>one line with the shop name</b> and tap ▾ to see the items. Filters (Bittu / Manna / Till) and the Profit tab work as before; category totals use each item's own category.</div></div>
+
+</div></body></html>
