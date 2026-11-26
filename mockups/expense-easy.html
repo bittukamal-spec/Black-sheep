@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Easier Expenses Mockup</title>
+<style>
+:root{--ink:#111827;--muted:#4b5563;--line:#e5e7eb;--soft:#f3f4f6}
+*{box-sizing:border-box}body{margin:0;background:#e5e7eb;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1{font-size:20px;margin:20px 20px 4px}.lead{margin:0 20px 16px;color:#374151;font-size:14px;max-width:1180px;line-height:1.5}
+.row{display:flex;flex-wrap:wrap;gap:24px;padding:0 20px 30px;align-items:flex-start}
+.phone{width:375px;height:800px;background:#f9fafb;border-radius:28px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18);position:relative}
+.label{font-weight:800;font-size:15px;margin-bottom:8px}.cap{width:375px;font-size:13px;color:#374151;margin-top:8px;line-height:1.45}.cap b{color:var(--ink)}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.sheet{position:absolute;left:0;right:0;bottom:0;top:40px;background:#fff;border-radius:22px 22px 0 0;padding:14px 16px 90px;overflow:hidden}
+.sheet h2{margin:0 0 10px;font-size:20px;display:flex;justify-content:space-between}
+.lbl{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 6px}
+.in{border:1.5px solid #d1d5db;border-radius:10px;padding:9px 11px;font-size:15px;background:#fff}
+.in.focus{border-color:#111827;box-shadow:0 0 0 3px #11182722}.ph{color:#9ca3af}
+.item{border:1.5px solid var(--line);border-radius:14px;padding:10px;margin-bottom:8px}
+.g{display:grid;gap:6px}
+.units{display:flex;gap:5px;flex-wrap:wrap}.u{border:1.5px solid #d1d5db;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:800}.u.on{background:#111827;color:#fff;border-color:#111827}
+.tag{border-radius:999px;padding:7px 13px;font-weight:800;font-size:14px;border:1.5px solid}
+.hint{font-size:12.5px;color:#047857;font-weight:700}
+.sugg{border:1.5px solid #111827;border-top:none;border-radius:0 0 12px 12px;margin-top:-6px;background:#fff;overflow:hidden}
+.sugg div{padding:9px 11px;border-top:1px solid var(--soft);font-size:14px}.sugg small{color:#6b7280;display:block;font-size:12px;margin-top:2px}
+.save{position:absolute;left:16px;right:16px;bottom:16px;background:var(--ink);color:#fff;border-radius:14px;padding:15px;text-align:center;font-weight:900;font-size:17px}
+.big{text-align:center;font-size:40px;font-weight:900;margin:4px 0}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.keys span{background:#f3f4f6;border-radius:12px;height:42px;display:grid;place-items:center;font-weight:800;font-size:18px}
+.keys span.new{background:#dcfce7;color:#166534;outline:2px solid #22c55e}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1.5px solid #d1d5db;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:800}.chip.on{background:#111827;color:#fff;border-color:#111827}
+.newb{background:#fef9c3;border-radius:6px;padding:0 4px;font-size:11px;font-weight:900;color:#854d0e;margin-left:4px}
+ul{margin:6px 20px 24px;padding-left:20px;font-size:14px;line-height:1.6;max-width:1180px}
+</style></head><body>
+<h1>Expenses: decimals, product size, and quicker filling</h1>
+<p class="lead"><b>1 · Decimals everywhere money is typed</b>: expenses, bills, repeating expenses, partner money in/out and stock "total paid" all accept ₹155.20. Totals show paise only when there are any (₹1,494 or ₹155.20).<br>
+<b>2 · Product size</b>: every expense item gets "how much": a number plus a unit tap (g · kg · ml · L · pcs · pack). The app then shows the price per unit (₹/kg, ₹/L) so you can compare shops, and fills the stock amount for you.<br>
+<b>3 · Quicker filling</b>: start typing an item and the app suggests what you bought before. One tap fills its category, size, last price and shop.</p>
+<div class="row">
+
+<div><div class="label">1 · Bill item: suggestions while typing</div>
+<div class="phone"><div class="dim"></div><div class="sheet">
+<h2>Add expense <span style="color:#6b7280">✕</span></h2>
+<div class="lbl">Shop</div><div class="in">D-Mart, Vijay Nagar</div>
+<div class="lbl">Items</div>
+<div class="item">
+<div class="in focus">amu<span class="ph">|</span></div>
+<div class="sugg">
+<div><b>Amul Taaza milk</b> <span class="newb">used 6×</span><small>🥛 Milk &amp; dairy · 1 L · last ₹68.50 · D-Mart</small></div>
+<div><b>Amul butter</b><small>🥛 Milk &amp; dairy · 500 g · last ₹285 · D-Mart</small></div>
+<div><b>Amul fresh cream</b><small>🥛 Milk &amp; dairy · 1 L · last ₹230 · Reliance</small></div>
+</div>
+</div>
+<div class="item" style="opacity:.55"><div class="g" style="grid-template-columns:1fr 110px"><div class="in ph">Item</div><div class="in ph">₹ price</div></div></div>
+<div class="save">Save bill</div>
+</div></div>
+<div class="cap">Suggestions come from <b>your own past expenses</b> (both phones). Tap one to fill everything; change anything you like. Typing a new name works as before.</div></div>
+
+<div><div class="label">2 · Bill item: size, price per unit</div>
+<div class="phone"><div class="dim"></div><div class="sheet">
+<h2>Add expense <span style="color:#6b7280">✕</span></h2>
+<div class="lbl">Items</div>
+<div class="item">
+<div class="g" style="grid-template-columns:1fr 110px"><div class="in">Amul Taaza milk</div><div class="in" style="text-align:right;font-weight:800">₹137.00</div></div>
+<div class="g" style="grid-template-columns:86px 1fr;margin-top:7px;align-items:center"><div class="in" style="text-align:right;font-weight:800">2</div>
+<div class="units"><span class="u">g</span><span class="u">kg</span><span class="u">ml</span><span class="u on">L</span><span class="u">pcs</span><span class="u">pack</span></div></div>
+<div class="hint" style="margin-top:6px">= ₹68.50 per L</div>
+<div style="display:flex;gap:8px;margin-top:8px"><span class="tag" style="background:#e0f2fe;color:#0369a1;border-color:#7dd3fc">🥛 Milk &amp; dairy ▾</span><span class="tag" style="background:#dcfce7;color:#166534;border-color:#86efac">✓ +2 L Milk</span></div>
+</div>
+<div class="item">
+<div class="g" style="grid-template-columns:1fr 110px"><div class="in">Hazelnut syrup</div><div class="in" style="text-align:right;font-weight:800">₹649.50</div></div>
+<div class="g" style="grid-template-columns:86px 1fr;margin-top:7px;align-items:center"><div class="in" style="text-align:right;font-weight:800">750</div>
+<div class="units"><span class="u">g</span><span class="u">kg</span><span class="u on">ml</span><span class="u">L</span><span class="u">pcs</span><span class="u">pack</span></div></div>
+<div class="hint" style="margin-top:6px">= ₹866 per L</div>
+<div style="display:flex;gap:8px;margin-top:8px"><span class="tag" style="background:#ffedd5;color:#b45309;border-color:#fdba74">🍯 Syrups ▾</span><span class="tag" style="background:#f0fdf4;color:#166534;border-color:#86efac">📦 + to stock</span></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:900;margin-top:6px"><span>Bill total · 2 items</span><span style="font-size:26px">₹786.50</span></div>
+<div class="save">Save bill · ₹786.50</div>
+</div></div>
+<div class="cap">Item and price on one line; size and unit underneath. When the item is linked to a stock item, <b>"+ to stock" fills itself</b> from the size (2 L → +2 L Milk), converting g↔kg and ml↔L.</div></div>
+
+<div><div class="label">3 · One item: decimal key + size</div>
+<div class="phone"><div class="dim"></div><div class="sheet">
+<h2>Add expense <span style="color:#6b7280">✕</span></h2>
+<div class="big">₹155.20</div>
+<div class="keys"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span class="new">.</span><span>0</span><span>⌫</span></div>
+<div class="lbl">What (start typing for suggestions)</div><div class="in">Coffee beans – Monsoon Malabar</div>
+<div class="g" style="grid-template-columns:86px 1fr;margin-top:7px;align-items:center"><div class="in" style="text-align:right;font-weight:800">250</div>
+<div class="units"><span class="u on">g</span><span class="u">kg</span><span class="u">ml</span><span class="u">L</span><span class="u">pcs</span><span class="u">pack</span></div></div>
+<div class="hint" style="margin-top:6px">= ₹620.80 per kg</div>
+<div class="lbl">Category</div>
+<div class="chips"><span class="chip">🥛 Milk &amp; dairy</span><span class="chip on">☕ Coffee beans</span><span class="chip">🍯 Syrups</span><span class="chip">＋ More</span></div>
+<div class="save">Save expense</div>
+</div></div>
+<div class="cap">The <b>"00" key becomes "."</b> for paise. "What" and size move up, right under the amount, since a suggestion there also picks the category and shop for you.</div></div>
+
+</div>
+<h1 style="font-size:17px">Also in this change</h1>
+<ul>
+<li>Expenses list and the bill breakdown show the size: "Amul Taaza milk · 2 L · ₹137".</li>
+<li>CSV export gets Quantity, Unit and Price-per-unit columns.</li>
+<li>Stock "Got stock in → Total paid" takes decimals, and its price per unit is exact.</li>
+<li>Old expenses keep their typed quantity text ("6 L") and still show it.</li>
+</ul>
+</body></html>
