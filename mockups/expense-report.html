@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expenses And Report Mockup</title>
+<style>
+:root{--ink:#111827;--muted:#4b5563;--line:#e5e7eb;--soft:#f3f4f6}
+*{box-sizing:border-box}body{margin:0;background:#e5e7eb;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1{font-size:20px;margin:20px 20px 4px}.lead{margin:0 20px 14px;color:#374151;font-size:14px;max-width:1600px;line-height:1.5}
+.row{display:flex;flex-wrap:wrap;gap:22px;padding:0 20px 26px;align-items:flex-start}
+.phone{width:375px;height:860px;background:#f9fafb;border-radius:28px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18);position:relative}
+.label{font-weight:800;font-size:15px;margin-bottom:8px}.cap{width:375px;font-size:13px;color:#374151;margin-top:8px;line-height:1.45}.cap b{color:var(--ink)}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.sheet{position:absolute;left:0;right:0;bottom:0;top:28px;background:#fff;border-radius:22px 22px 0 0;padding:14px 16px 90px;overflow:hidden}
+.sheet h2{margin:0 0 6px;font-size:20px;display:flex;justify-content:space-between}
+.n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#111827;color:#fff;font-size:11px;font-weight:900;margin-right:6px}
+.lbl{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:11px 0 5px;display:flex;align-items:center}
+.in{border:1.5px solid #d1d5db;border-radius:10px;padding:8px 10px;font-size:15px;background:#fff}.ph{color:#9ca3af}
+.item{border:1.5px solid var(--line);border-radius:14px;padding:9px;margin-bottom:7px}
+.g{display:grid;gap:6px}
+.u{border:1.5px solid #d1d5db;border-radius:999px;padding:4px 9px;font-size:12.5px;font-weight:800}.u.on{background:#111827;color:#fff;border-color:#111827}
+.tag{border-radius:999px;padding:6px 12px;font-weight:800;font-size:13px;border:1.5px solid;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:5px}.chip{border:1.5px solid #d1d5db;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:800}.chip.on{background:#111827;color:#fff;border-color:#111827}
+.save{position:absolute;left:16px;right:16px;bottom:14px;background:var(--ink);color:#fff;border-radius:14px;padding:15px;text-align:center;font-weight:900;font-size:17px}
+.page{padding:12px 14px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px}
+.day{margin:10px 0 3px;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.exp{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--soft)}
+.ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.t{font-weight:800;font-size:15px}.s{font-size:12px;color:var(--muted);margin-top:2px}
+.amt{margin-left:auto;font-weight:900;font-size:15px}
+.seg{display:flex;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:3px}.seg span{flex:1;text-align:center;padding:6px 0;border-radius:9px;font-size:13px;font-weight:800;color:var(--muted)}.seg span.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.pl div{display:flex;justify-content:space-between;font-size:14px;padding:3px 0}.pl .tot{border-top:1.5px solid var(--ink);margin-top:4px;padding-top:6px;font-weight:900;font-size:17px}
+.bar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:6px 0}
+.prod .h{display:flex;justify-content:space-between;align-items:baseline}.prod .h b{font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:7px 0;text-align:center}.flow div{background:var(--soft);border-radius:8px;padding:5px 2px;font-size:11px;color:var(--muted);font-weight:700}.flow b{display:block;font-size:14px;color:var(--ink)}
+.tip{font-size:12.5px;background:#fef3c7;color:#92400e;border-radius:8px;padding:6px 8px;font-weight:700;margin-top:6px}
+.up{color:#b91c1c;font-weight:800}.down{color:#15803d;font-weight:800}
+.alert{background:#fff;border:2px solid #f59e0b;border-radius:16px;padding:12px;margin-bottom:10px}
+.btn{display:inline-block;border-radius:10px;padding:8px 12px;font-weight:900;font-size:13px}
+ol,ul{margin:6px 20px 20px;padding-left:22px;font-size:14px;line-height:1.6;max-width:1500px}
+</style></head><body>
+<h1>One expense form, vendor-first list, and a weekly/monthly "what we bought, used and wasted" report</h1>
+<p class="lead">"One item" and "Several items" become one form. A single purchase is just a bill with one item, and <b>+ Add item</b> is always there. The order follows how you'd say it: <b>where → how much → what → when → who paid</b>.</p>
+<div class="row">
+
+<div><div class="label">1 · Add expense (one form)</div>
+<div class="phone"><div class="dim"></div><div class="sheet">
+<h2>Add expense <span style="color:#6b7280">✕</span></h2>
+<div class="lbl"><span class="n">1</span>Shop / vendor</div><div class="in">Wheat &amp; Co. Bakery</div>
+<div class="lbl"><span class="n">2</span>Total</div>
+<div style="display:flex;justify-content:space-between;align-items:center;background:#f3f4f6;border-radius:12px;padding:8px 12px"><span style="font-size:13px;color:#4b5563;font-weight:700">adds up from the items</span><span style="font-size:30px;font-weight:900">₹420</span></div>
+<div class="lbl"><span class="n">3</span>Items</div>
+<div class="item">
+<div class="g" style="grid-template-columns:1fr 100px"><div class="in">Sourdough bread</div><div class="in" style="text-align:right;font-weight:800">₹180</div></div>
+<div class="g" style="grid-template-columns:62px 1fr;margin-top:6px;align-items:center"><div class="in" style="text-align:right;font-weight:800">1</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="u">g</span><span class="u">kg</span><span class="u">ml</span><span class="u">L</span><span class="u">pcs</span><span class="u on">pack</span></div></div>
+<div style="display:flex;gap:6px;margin-top:7px;flex-wrap:wrap"><span class="tag" style="background:#fef3c7;color:#a16207;border-color:#fcd34d">🍪 Snacks stock ▾</span><span class="tag" style="background:#dcfce7;color:#166534;border-color:#86efac">✓ +12 slices Sourdough</span></div>
+<div style="font-size:12px;color:#047857;font-weight:700;margin-top:5px">= ₹15 per slice · keeps 3 days → expires Thu</div>
+</div>
+<div class="item">
+<div class="g" style="grid-template-columns:1fr 100px"><div class="in">Butter</div><div class="in" style="text-align:right;font-weight:800">₹240</div></div>
+<div style="display:flex;gap:6px;margin-top:7px"><span class="tag" style="background:#e0f2fe;color:#0369a1;border-color:#7dd3fc">🥛 Milk &amp; dairy ▾</span><span class="tag" style="background:#dcfce7;color:#166534;border-color:#86efac">✓ +0.5 kg Butter</span></div>
+</div>
+<div style="border:1.5px dashed #9ca3af;border-radius:12px;text-align:center;padding:9px;font-weight:800;font-size:14px">+ Add item</div>
+<div class="lbl"><span class="n">4</span>Date</div><div class="in" style="width:170px">Mon, 23 Nov</div>
+<div class="lbl"><span class="n">5</span>Who paid · how</div>
+<div class="chips"><span class="chip" style="background:#1e40af;border-color:#1e40af;color:#fff">Bittu · this phone</span><span class="chip">Till cash</span><span class="chip">Manna</span><span class="chip on">UPI</span><span class="chip">Cash</span></div>
+<div class="save">Save · ₹420</div>
+</div></div>
+<div class="cap">No number keypad: you type each item's price and the total adds up. With one item it's as quick as before. <b>"Repeats every month"</b> (rent, salary) still shows when there's only one item.</div></div>
+
+<div><div class="label">2 · Expenses list: vendor first</div>
+<div class="phone"><div class="page">
+<div class="card"><div style="font-size:13px;color:#4b5563;font-weight:700">Spent this month</div><div style="font-size:26px;font-weight:900">₹24,180</div></div>
+<div class="day">Mon, 23 Nov</div>
+<div class="exp"><div class="ico" style="background:#f3f4f6">🧾</div><div><div class="t">Wheat &amp; Co. Bakery</div><div class="s">Sourdough bread 1 pack · Butter · <b style="color:#1e40af">Bittu</b> · UPI</div></div><div class="amt">₹420</div></div>
+<div class="exp"><div class="ico" style="background:#e0f2fe">🥛</div><div><div class="t">D-Mart</div><div class="s">Amul Taaza milk 2 L · <b style="color:#92400e">Till</b> · Cash</div></div><div class="amt">₹137.50</div></div>
+<div class="exp"><div class="ico" style="background:#efe7e1">☕</div><div><div class="t">Blue Tokai</div><div class="s">Monsoon Malabar 250 g · <b style="color:#1e40af">Bittu</b> · UPI</div></div><div class="amt">₹620</div></div>
+<div class="day">Sun, 1 Nov</div>
+<div class="exp"><div class="ico" style="background:#ede9fe">🏠</div><div><div class="t">Rent <span style="background:#ede9fe;color:#6d28d9;border-radius:99px;padding:0 6px;font-size:10px">monthly</span></div><div class="s">no shop entered · <b style="color:#9d174d">Manna</b> · UPI</div></div><div class="amt">₹15,000</div></div>
+</div></div>
+<div class="cap">Every entry shows the <b>shop name</b> as its heading and the items under it. If no shop was entered, it falls back to the item or category.</div></div>
+
+<div><div class="label">3 · Money → Report (week / month)</div>
+<div class="phone"><div class="page">
+<div class="seg"><span class="on">Week</span><span>Month</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin:8px 2px;font-weight:900"><span>‹</span><span>23 – 29 Nov</span><span style="color:#d1d5db">›</span></div>
+<div class="card pl">
+<div><span>Sales</span><b>₹18,450</b></div>
+<div><span>Cost of what was used <small style="color:#6b7280">(recipes)</small></span><b>−₹5,120</b></div>
+<div><span>Wasted <small style="color:#6b7280">(expired, spilled)</small></span><b class="up">−₹640</b></div>
+<div><span>Running costs <small style="color:#6b7280">(rent, gas, fuel…)</small></span><b>−₹4,300</b></div>
+<div class="tot"><span>Profit</span><span style="color:#15803d">₹8,390</span></div>
+<div style="font-size:12px;color:#4b5563;margin-top:4px">Food cost 28% of sales · last week 26%</div>
+</div>
+<div class="day">Products this week</div>
+<div class="card prod">
+<div class="h"><b>🍞 Sourdough bread</b><span style="font-size:12px">₹15/slice <span class="up">▲7%</span></span></div>
+<div class="flow"><div>Bought<b>12</b>₹180</div><div>Used<b>4</b>2 toasts</div><div>Wasted<b class="up">8</b>₹120</div><div>Left<b>0</b>slices</div></div>
+<div class="bar"><span style="width:33%;background:#16a34a"></span><span style="width:67%;background:#dc2626"></span></div>
+<div class="tip">💡 Only 33% used before it expired. Buy half a loaf, or freeze slices.</div>
+</div>
+<div class="card prod">
+<div class="h"><b>🥛 Milk</b><span style="font-size:12px">₹68.75/L <span class="down">▼2%</span></span></div>
+<div class="flow"><div>Bought<b>14 L</b>₹963</div><div>Used<b>12.6 L</b>84 drinks</div><div>Wasted<b>0.5 L</b>₹34</div><div>Left<b>0.9 L</b></div></div>
+<div class="bar"><span style="width:90%;background:#16a34a"></span><span style="width:4%;background:#dc2626"></span><span style="width:6%;background:#d1d5db"></span></div>
+</div>
+<div class="card prod">
+<div class="h"><b>☕ Coffee beans</b><span style="font-size:12px">₹2,480/kg <span class="up">▲4%</span></span></div>
+<div class="flow"><div>Bought<b>0.5 kg</b>₹1,240</div><div>Used<b>1.2 kg</b>96 shots</div><div>Wasted<b>0</b></div><div>Left<b>0.3 kg</b></div></div>
+</div>
+</div></div>
+<div class="cap">Per product: <b>bought → used in sales → wasted → left</b>, price per unit vs last week, and a tip when a lot is wasted. Tap a product to see each day (Mon bought 12, Tue used 2, Thu expired 8…). <b>Download CSV</b> at the bottom.</div></div>
+
+<div><div class="label">4 · Waste is caught for you</div>
+<div class="phone"><div class="page">
+<div style="font-size:22px;font-weight:900;margin:4px 2px 10px">Admin</div>
+<div class="alert">
+<div style="font-weight:900;font-size:15px">🍞 Sourdough bread expires today</div>
+<div style="font-size:13px;color:#4b5563;margin:3px 0 8px">8 slices left (bought Mon, keeps 3 days)</div>
+<span class="btn" style="background:#dc2626;color:#fff">Mark 8 as wasted</span> <span class="btn" style="border:1.5px solid #d1d5db">Some left?</span> <span class="btn" style="border:1.5px solid #d1d5db">Still good</span>
+</div>
+<div class="alert" style="border-color:#d1d5db">
+<div style="font-weight:900;font-size:15px">📋 Weekly count · Sunday</div>
+<div style="font-size:13px;color:#4b5563;margin:3px 0 8px">Check 6 items so the report stays accurate (2 min)</div>
+<span class="btn" style="background:#111827;color:#fff">Start count</span>
+</div>
+<div class="card" style="font-size:13px;line-height:1.55">
+<b>What fills the report by itself</b><br>
+✅ <b>Bought</b>: expenses with "+ to stock" (suggestions link them for you)<br>
+✅ <b>Used</b>: every sale, through recipes (2 slices per toast)<br>
+✅ <b>Expiry</b>: each stock item gets "keeps for N days", so the expiry date is set when you buy<br>
+✅ <b>Wasted</b>: one tap on the expiry alert, or Stock → Waste for spills<br>
+✋ <b>You do</b>: a 2-minute count on Sundays (optional, fixes small drifts)
+</div>
+</div></div>
+<div class="cap">New setting per stock item: <b>"Keeps for … days"</b> (bread 3, milk 2, beans 30). Buying sets the expiry by itself, and on that day Admin asks one question.</div></div>
+
+</div>
+<h1 style="font-size:17px">What you'd set up once</h1>
+<ol>
+<li>Recipes for toasts and sandwiches (e.g. Avocado toast = 2 slices sourdough + 1 avocado + 10 g butter). Coffee recipes already exist.</li>
+<li>Pack sizes and "keeps for" days on stock items (Sourdough: 1 pack = 12 slices, keeps 3 days).</li>
+<li>Link each regular purchase to its stock item once. After that, suggestions do it automatically.</li>
+</ol>
+</body></html>
